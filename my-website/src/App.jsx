@@ -1,12 +1,18 @@
-import React from 'react'
-import HeroSection from './components/HeroSection'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HeroSection from './components/HeroSection';
+import Essays from './components/Essays';
 
-function App() {
+const App = () => {
   return (
-    <div>
-      <HeroSection />
-    </div>
-  )
-}
+    <Router>
+      <Routes>
+        <Route path="/" element={<HeroSection />} />
+        <Route path="/essays" element={<Essays />} />
+        <Route path="/products" element={<div>Products page coming soon...</div>} />
+      </Routes>
+    </Router>
+  );
+};
 
-export default App
+export default App;
