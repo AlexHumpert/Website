@@ -62,7 +62,7 @@ const HeroSection = () => {
               color: 'black',
               fontSize: '40px',
               textDecoration: 'none',
-              fontFamily: 'Georgia, serif'
+              fontFamily: "'Playfair Display', serif"
             }}
           >
             Interviews
