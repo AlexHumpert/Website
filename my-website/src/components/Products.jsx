@@ -1,29 +1,6 @@
-// src/components/Products.jsx
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-const ProductLink = ({ title, author, date, slug }) => (
-  <article className="py-12 border-t border-gray-200 first:border-none">
-    <h2 className="text-5xl font-normal mb-4 hover:text-blue-600">
-      <Link to={`/Products/${slug}`} className="block">{title}</Link>
-    </h2>
-    <div className="text-gray-500 uppercase tracking-wider text-sm">
-      {author} • {date}
-    </div>
-  </article>
-);
 
 const Products = () => {
-  const products = [
-    {
-      title: "Algorithms of Mass Division",
-      author: "ALEXANDER WOLFGANG HUMPERT",
-      date: "February 21, 2025",
-      slug: "ai-personas"
-    },
-    // Add more products here as needed
-  ];
-
   return (
     <div className="min-h-screen bg-white px-8">
       <div className="max-w-3xl mx-auto pt-16">
@@ -34,12 +11,18 @@ const Products = () => {
           Products
         </h1>
         <div className="space-y-4">
-          {products.map((product, index) => (
-            <ProductLink
-              key={index}
-              {...product}
-            />
-          ))}
+          <article className="py-12">
+            <h2 className="text-5xl font-normal mb-4 hover:text-blue-600">
+              <a 
+                href="https://ai-persona-marketing-397812137944.europe-west1.run.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="block"
+              >
+                AI Personas
+              </a>
+            </h2>
+          </article>
         </div>
       </div>
     </div>
