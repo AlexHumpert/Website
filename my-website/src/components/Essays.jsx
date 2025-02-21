@@ -16,10 +16,10 @@ const EssayLink = ({ title, author, date, slug }) => (
 const Essays = () => {
   const essays = [
     {
-      title: "Algorithms of Mass Connection",
+      title: "Algorithms of Mass Division",
       author: "ALEXANDER WOLFGANG HUMPERT",
       date: "February 21, 2025",
-      slug: "algorithms-of-mass-connection"
+      slug: "algorithms-of-mass-division"
     },
     // Add more essays here as needed
   ];
