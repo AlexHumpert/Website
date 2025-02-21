@@ -1,3 +1,4 @@
+// HeroSection.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -13,14 +14,16 @@ const HeroSection = () => {
       top: 0,
       left: 0,
       margin: 0,
-      padding: 0
+      padding: 0,
+      backgroundColor: '#ffffff'
     }}>
       <div>
         <h1 style={{
           fontSize: '64px',
           fontWeight: 'bold',
           marginBottom: '24px',
-          lineHeight: '1.2'
+          lineHeight: '1.2',
+          fontFamily: "'Playfair Display', serif"
         }}>
           A democracy,
           <br />
@@ -28,16 +31,16 @@ const HeroSection = () => {
         </h1>
         <div style={{
           display: 'flex',
-          gap: '100px',  // Added spacing between links
+          gap: '100px',
           justifyContent: 'center'
         }}>
           <Link 
             to="/essays" 
             style={{
               color: 'black',
-              fontSize: '40px',  // Increased font size
+              fontSize: '40px',
               textDecoration: 'none',
-              fontFamily: 'Georgia, serif'
+              fontFamily: "'Playfair Display', serif" 
             }}
           >
             Essays
@@ -46,12 +49,23 @@ const HeroSection = () => {
             to="/products" 
             style={{
               color: 'black',
-              fontSize: '40px',  // Increased font size
+              fontSize: '40px',
+              textDecoration: 'none',
+              fontFamily: "'Playfair Display', serif" 
+            }}
+          >
+            Products
+          </Link>
+          <Link 
+            to="/interviews" 
+            style={{
+              color: 'black',
+              fontSize: '40px',
               textDecoration: 'none',
               fontFamily: 'Georgia, serif'
             }}
           >
-            Products
+            Interviews
           </Link>
         </div>
       </div>
@@ -59,4 +73,5 @@ const HeroSection = () => {
   );
 };
 
+// Make sure this export default statement is present
 export default HeroSection;
