@@ -7,8 +7,8 @@ const ProductTemplate = ({ title, author, date, children }) => {
     <div className="min-h-screen bg-white">
       <div style={{ paddingLeft: '64px', paddingTop: '32px', maxWidth: '800px' }}>
         <div style={{ maxWidth: '600px' }}>
-          <Link to="/Essays" className="text-purple-700 hover:underline mb-8 block text-lg">
-            ← Back to Essays
+          <Link to="/Products" className="text-purple-700 hover:underline mb-8 block text-lg">
+            ← Back to Products
           </Link>
           
           <h1 className="text-5xl font-normal mb-1">
