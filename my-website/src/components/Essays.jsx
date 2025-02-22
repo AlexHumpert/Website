@@ -5,8 +5,26 @@ import { ArrowLeft } from 'lucide-react';
 
 const EssayLink = ({ title, author, date, slug }) => (
   <article className="py-12 border-t border-gray-200 first:border-none">
-    <h2 className="text-5xl font-normal mb-4 hover:text-blue-600">
-      <Link to={`/Essays/${slug}`} className="block">{title}</Link>
+    <h2 className="text-5xl font-normal mb-4">
+      <style>
+        {`
+          .essay-link:hover {
+            color: red !important;
+            transition: color 0.2s ease;
+          }
+        `}
+      </style>
+      <Link 
+        to={`/Essays/${slug}`} 
+        className="block essay-link"
+        style={{ 
+          color: 'black',
+          textDecoration: 'none',
+          fontWeight: 'bold'
+        }}
+      >
+        {title}
+      </Link>
     </h2>
     <div className="text-gray-500 uppercase tracking-wider text-sm">
       {author} • {date}
