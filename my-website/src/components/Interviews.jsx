@@ -19,7 +19,10 @@ const Interviews = () => {
                 rel="noopener noreferrer"
                 className="block"
               >
-                Bernhard Humpert: My Dad, Growing up in Southern Germany during WW2 | Alexander Humpert Podcast #1
+                <div>Bernhard Humpert</div>
+                <div className="text-xl mt-4"> 
+                  My Dad, Growing up in Southern Germany during WW2 | Alexander Humpert Podcast #1
+                </div>
               </a>
             </h2>
           </article>
