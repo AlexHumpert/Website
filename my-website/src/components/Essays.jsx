@@ -1,6 +1,7 @@
 // src/components/Essays.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 const EssayLink = ({ title, author, date, slug }) => (
   <article className="py-12 border-t border-gray-200 first:border-none">
@@ -26,23 +27,34 @@ const Essays = () => {
 
   return (
     <div className="min-h-screen bg-white px-8">
-      <div className="max-w-3xl mx-auto pt-16">
-        <h1 
-          className="text-6xl text-black font-normal mb-16" 
-          style={{ fontFamily: "'Playfair Display', serif" }}
-        >
-          Essays
-        </h1>
-        <div className="space-y-4">
-          {essays.map((essay, index) => (
-            <EssayLink
-              key={index}
-              {...essay}
-            />
-          ))}
-        </div>
+      <div style={{ paddingLeft: '64px', paddingTop: '32px', maxWidth: '800px' }}>
+        <div style={{ maxWidth: '600px' }}>
+          <Link 
+                to="/"
+                className="inline-block mb-8 text-xl hover:text-blue-600 transition-colors"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                <ArrowLeft size={24} color="black" strokeWidth={2} className="hover:opacity-80" />
+              </Link>
+            <div className="max-w-3xl mx-auto pt-16">
+              <h1 
+                className="text-6xl text-black font-normal mb-16" 
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                Essays
+              </h1>
+              <div className="space-y-4">
+                {essays.map((essay, index) => (
+                  <EssayLink
+                    key={index}
+                    {...essay}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>      
       </div>
-    </div>
   );
 };
 
