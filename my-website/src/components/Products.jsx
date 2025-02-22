@@ -2,29 +2,37 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 
-const ProductLink = ({ title, url }) => (
-  <article className="py-12 border-t border-gray-200 first:border-none">
+const ProductLink = ({ title, subtitle, url }) => (
+  <article className="py-12 border-t border-gray-500 first:border-none">
+    <style>
+      {`
+        .product-title:hover {
+          color: #D3D3D3 !important;
+          transition: color 0.2s ease;
+        }
+        .product-subtitle {
+          font-weight: normal !important;
+          opacity: 0.9;
+        }
+        .product-subtitle:hover {
+          color: #D3D3D3 !important;
+          transition: color 0.2s ease;
+        }
+      `}
+    </style>
     <h2 className="text-5xl font-normal mb-4">
-      <style>
-        {`
-          .product-link:hover {
-            color: #D3D3D3 !important;
-            transition: color 0.2s ease;
-          }
-        `}
-      </style>
       <a 
         href={url}
         target="_blank"
         rel="noopener noreferrer"
-        className="block product-link"
+        className="block"
         style={{ 
           color: 'black',
           textDecoration: 'none',
-          fontWeight: 'bold'
         }}
       >
-        {title}
+        <div className="product-title font-bold">{title}</div>
+        <div className="product-subtitle text-xl mt-4">{subtitle}</div>
       </a>
     </h2>
   </article>
@@ -38,6 +46,7 @@ const Products = () => {
   const products = [
     {
       title: "AI Personas",
+      subtitle: "Pre-test marketing content against customer personas",
       url: "https://ai-persona-marketing-397812137944.europe-west1.run.app/"
     }
     // Add more products here as needed
