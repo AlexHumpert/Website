@@ -51,7 +51,7 @@ const AlgorithmsOfMassDivision = () => {
       </p>
 
       <p>
-        Imagine walking to your local bookstore (if you still do that) and asking the lady behind the counter to recommend you some books to keep you entertained for the weekend. A couple of minutes later the bookkeeper drops a stack of books on the counter — "these books should do the trick — they will confirm all your fears and dislikes about other groups of people. Instead of exploring new ideas, these books will harden and exaggerate your existing biases. Have a great day, and oh! Don't forget to vote!"
+        Imagine walking to your local bookstore (if you still do that) and asking the lady behind the counter to recommend you some books to keep you entertained for the weekend. A couple of minutes later the harmless lady drops a stack of books on the counter — "these books should do the trick — they will confirm all your fears and dislikes about other groups of people. Instead of exploring new ideas, these books will harden and exaggerate your existing biases. Have a great day, and oh! Don't forget to vote!"
       </p>
 
       <p>

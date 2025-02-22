@@ -9,7 +9,7 @@ const EssayLink = ({ title, author, date, slug }) => (
       <style>
         {`
           .essay-link:hover {
-            color: red !important;
+            color: #D3D3D3 !important;
             transition: color 0.2s ease;
           }
         `}
@@ -32,6 +32,12 @@ const EssayLink = ({ title, author, date, slug }) => (
   </article>
 );
 
+
+const Spacer = ({ size }) => (
+  <div style={{ height: `${size}px` }}></div>
+);
+
+
 const Essays = () => {
   const essays = [
     {
@@ -45,8 +51,8 @@ const Essays = () => {
 
   return (
     <div className="min-h-screen bg-white px-8">
-      <div style={{ paddingLeft: '64px', paddingTop: '32px', maxWidth: '800px' }}>
-        <div style={{ maxWidth: '600px' }}>
+      <div style={{ paddingLeft: '64px', paddingTop: '32px', maxWidth: '900px' }}>
+        <div style={{ maxWidth: '900px' }}>
           <Link 
                 to="/"
                 className="inline-block mb-8 text-xl hover:text-blue-600 transition-colors"
@@ -56,11 +62,12 @@ const Essays = () => {
               </Link>
             <div className="max-w-3xl mx-auto pt-16">
               <h1 
-                className="text-6xl text-black font-normal mb-16" 
+                className="text-6xl text-black font-normal mb-12" 
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 Essays
               </h1>
+              <Spacer size={25} /> {/* Adjust size prop to control spacing */}
               <div className="space-y-4">
                 {essays.map((essay, index) => (
                   <EssayLink

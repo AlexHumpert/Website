@@ -18,6 +18,14 @@ const HeroSection = () => {
       backgroundColor: '#ffffff'
     }}>
       <div>
+        <style>
+          {`
+            .nav-link:hover {
+              color: #D3D3D3  !important;
+              transition: color 0.2s ease;
+            }
+          `}
+        </style>
         <h1 style={{
           fontSize: '64px',
           fontWeight: 'bold',
@@ -36,6 +44,7 @@ const HeroSection = () => {
         }}>
           <Link 
             to="/essays" 
+            className="nav-link"
             style={{
               color: 'black',
               fontSize: '40px',
@@ -47,6 +56,7 @@ const HeroSection = () => {
           </Link>
           <Link 
             to="/products" 
+            className="nav-link"
             style={{
               color: 'black',
               fontSize: '40px',
@@ -58,6 +68,7 @@ const HeroSection = () => {
           </Link>
           <Link 
             to="/interviews" 
+            className="nav-link"
             style={{
               color: 'black',
               fontSize: '40px',
@@ -73,5 +84,4 @@ const HeroSection = () => {
   );
 };
 
-// Make sure this export default statement is present
 export default HeroSection;
