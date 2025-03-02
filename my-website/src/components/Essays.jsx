@@ -41,11 +41,17 @@ const Spacer = ({ size }) => (
 const Essays = () => {
   const essays = [
     {
+      title: "A Call to Defend Democracy",
+      author: "ALEXANDER WOLFGANG HUMPERT",
+      date: "March 02, 2025",
+      slug: "a-call-to-defend-democracy"
+    },
+    {
       title: "Algorithms of Mass Division",
       author: "ALEXANDER WOLFGANG HUMPERT",
       date: "February 21, 2025",
       slug: "algorithms-of-mass-division"
-    },
+    }
     // Add more essays here as needed
   ];
 
