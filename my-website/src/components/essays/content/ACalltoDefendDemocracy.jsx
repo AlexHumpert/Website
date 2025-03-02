@@ -36,7 +36,10 @@ const ACalltoDefendDemocracy = () => {
       </div>
 
       <p>
-        My brethren,
+        My brothers and sisters,
+      </p>
+      
+      <p>
         Our gathering today is not one of joy and celebration, but of concern and fear for our fair lady—Democracy.
       </p>
 
