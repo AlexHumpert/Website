@@ -41,6 +41,12 @@ const Spacer = ({ size }) => (
 const Essays = () => {
   const essays = [
     {
+      title: "DemocraTech: Rebuilding the Bridge Between Citizens & Policy",
+      author: "ALEXANDER WOLFGANG HUMPERT",
+      date: "April 20, 2025",
+      slug: "democraTech:-rebuilding-the-bridge-between-citizens-&-policy"
+    },
+    {
       title: "A Call to Defend Democracy",
       author: "ALEXANDER WOLFGANG HUMPERT",
       date: "March 02, 2025",
@@ -51,7 +57,7 @@ const Essays = () => {
       author: "ALEXANDER WOLFGANG HUMPERT",
       date: "February 21, 2025",
       slug: "algorithms-of-mass-division"
-    }
+    },
     // Add more essays here as needed
   ];
 

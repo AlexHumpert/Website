@@ -45,9 +45,9 @@ const Spacer = ({ size }) => (
 const Products = () => {
   const products = [
     {
-      title: "AI Personas",
-      subtitle: "Pre-test marketing content against customer personas",
-      url: "https://ai-persona-marketing-397812137944.europe-west1.run.app/"
+      title: "Polaris",
+      subtitle: "Consensus Discovery Platform, inspired by pol.is",
+      url: "https://polaris-app-397812137944.europe-west1.run.app/"
     }
     // Add more products here as needed
   ];
