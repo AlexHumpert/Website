@@ -41,6 +41,12 @@ const Spacer = ({ size }) => (
 const Essays = () => {
   const essays = [
     {
+      title: "The Distortion Machine: Mapping Information's Journey from Reality to Public Conciousness",
+      author: "ALEXANDER WOLFGANG HUMPERT",
+      date: "April 21, 2025",
+      slug: "distortion-machine"
+    },
+    {
       title: "DemocraTech: Rebuilding the Bridge Between Citizens & Policy",
       author: "ALEXANDER WOLFGANG HUMPERT",
       date: "April 20, 2025",

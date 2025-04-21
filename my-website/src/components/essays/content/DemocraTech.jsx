@@ -15,7 +15,7 @@ const imageConfig = {
 const DemocraTech = () => {
   return (
     <EssayTemplate
-      title="DemocraTech: Building the Bridging between Citizens and Policy"
+      title="DemocraTech: Bridging the Gap between Citizens and Policy"
       author="ALEXANDER WOLFGANG HUMPERT"
       date="April 04, 2025"
     >
