@@ -9,6 +9,7 @@ import AlgorithmsOfMassDivision from './components/essays/content/AlgorithmsOfMa
 import ACalltoDefendDemocracy from './components/essays/content/ACalltoDefendDemocracy';
 import DemocraTech from './components/essays/content/DemocraTech';
 import DistortionMachine from './components/essays/content/DistortionMachine';
+import PostPlatformSocialInternet from './components/essays/content/PostPlatformSocialInternet';
 
 function App() {
   console.log('App is rendering');
@@ -23,6 +24,7 @@ function App() {
           <Route path="/Essays/a-call-to-defend-democracy" element={<ACalltoDefendDemocracy />} />
           <Route path="/Essays/democraTech:-rebuilding-the-bridge-between-citizens-&-policy" element={<DemocraTech />} />
           <Route path="/Essays/distortion-machine" element={<DistortionMachine />} />
+          <Route path="/Essays/post-platform-social-internet" element={<PostPlatformSocialInternet />} />
           <Route path="/Products" element={<Products />} />
           <Route path="/Interviews" element={<Interviews />} />
         </Routes>

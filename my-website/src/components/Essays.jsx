@@ -41,6 +41,12 @@ const Spacer = ({ size }) => (
 const Essays = () => {
   const essays = [
     {
+      title: "Toward a Post-Platform Social Internet: A Position Paper for Protocol-Based Digital Public Life",
+      author: "ALEXANDER WOLFGANG HUMPERT",
+      date: "May 2, 2025",
+      slug: "post-platform-social-internet"
+    },
+    {
       title: "The Distortion Machine: Mapping Information's Journey from Reality to Public Conciousness",
       author: "ALEXANDER WOLFGANG HUMPERT",
       date: "April 21, 2025",
