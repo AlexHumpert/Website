@@ -1,34 +1,35 @@
-// src/App.jsx
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HeroSection from './components/HeroSection';
-import Essays from './components/Essays';
-import Products from './components/Products';
-import Interviews from './components/Interviews';
-import AlgorithmsOfMassDivision from './components/essays/content/AlgorithmsOfMassDivision';
-import ACalltoDefendDemocracy from './components/essays/content/ACalltoDefendDemocracy';
-import DemocraTech from './components/essays/content/DemocraTech';
-import DistortionMachine from './components/essays/content/DistortionMachine';
-import PostPlatformSocialInternet from './components/essays/content/PostPlatformSocialInternet';
+import Nav from './components/Nav';
+import HomePage from './components/HomePage';
+
+// Placeholder pages — to be built out
+function ComingSoon({ title }) {
+  return (
+    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingTop: '6rem' }}>
+      <div style={{ textAlign: 'center' }}>
+        <p style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-sm)', color: 'var(--muted)', marginBottom: '1rem' }}>
+          Coming soon
+        </p>
+        <h1 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-4xl)', fontWeight: 400, color: 'var(--ink)', margin: 0 }}>
+          {title}
+        </h1>
+      </div>
+    </main>
+  );
+}
 
 function App() {
-  console.log('App is rendering');
-  
   return (
     <Router>
-      <div style={{ backgroundColor: 'white' }}>
-        <Routes>
-          <Route path="/" element={<HeroSection />} />
-          <Route path="/Essays" element={<Essays />} />
-          <Route path="/Essays/algorithms-of-mass-division" element={<AlgorithmsOfMassDivision />} />
-          <Route path="/Essays/a-call-to-defend-democracy" element={<ACalltoDefendDemocracy />} />
-          <Route path="/Essays/democraTech:-rebuilding-the-bridge-between-citizens-&-policy" element={<DemocraTech />} />
-          <Route path="/Essays/distortion-machine" element={<DistortionMachine />} />
-          <Route path="/Essays/post-platform-social-internet" element={<PostPlatformSocialInternet />} />
-          <Route path="/Products" element={<Products />} />
-          <Route path="/Interviews" element={<Interviews />} />
-        </Routes>
-      </div>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/writing" element={<ComingSoon title="Writing" />} />
+        <Route path="/work" element={<ComingSoon title="Work" />} />
+        <Route path="/work/:slug" element={<ComingSoon title="Case Study" />} />
+        <Route path="/projects" element={<ComingSoon title="Projects" />} />
+        <Route path="/projects/:slug" element={<ComingSoon title="Project" />} />
+      </Routes>
     </Router>
   );
 }
