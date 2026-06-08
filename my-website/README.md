@@ -1,87 +1,113 @@
-# React + Vite
+# Alexander Humpert — Personal Site
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio and writing hub. Built with React + Vite + Tailwind CSS.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-
-## Run App Locally
-```console
-npm run dev
+```bash
+npm run dev        # http://localhost:5173
+npm run build      # production build
+npm run preview    # preview production build
 ```
 
 ---
 
-## Codebase Summary
+## Tech stack
 
-### Overview
-Personal portfolio website for Alexander Wolfgang Humpert, featuring essays, products, and interviews focused on democracy, technology, and social issues.
+| Category   | Technology       | Version    |
+|------------|------------------|------------|
+| Framework  | React            | ^19.0.0    |
+| Build      | Vite             | ^6.1.0     |
+| CSS        | Tailwind CSS     | ^4.0.7     |
+| Routing    | react-router-dom | ^6.22.0    |
+| Icons      | lucide-react     | ^0.475.0   |
 
-### Project Structure
-```
-my-website/
-├── src/
-│   ├── App.jsx              # Main app with React Router routes
-│   ├── main.jsx             # React entry point
-│   ├── index.css            # Global styles
-│   ├── components/
-│   │   ├── HeroSection.jsx  # Landing page with navigation
-│   │   ├── Essays.jsx       # Essays listing page
-│   │   ├── Products.jsx     # Products listing page
-│   │   ├── Interviews.jsx   # Interviews listing page
-│   │   └── essays/
-│   │       ├── EssayTemplate.jsx  # Reusable essay layout
-│   │       └── content/      # Individual essay components
-│   │           ├── ACalltoDefendDemocracy.jsx
-│   │           ├── AlgorithmsOfMassDivision.jsx
-│   │           ├── DemocraTech.jsx
-│   │           ├── DistortionMachine.jsx
-│   │           └── PostPlatformSocialInternet.jsx
-│   └── assets/              # Essay images and assets
-├── index.html
-├── package.json
-├── vite.config.js
-├── tailwind.config.cjs
-└── postcss.config.cjs
-```
+## Site structure
 
-### Tech Stack
-| Category | Technology | Version |
-|----------|------------|---------|
-| Framework | React | ^19.0.0 |
-| Build Tool | Vite | ^6.1.0 |
-| CSS | Tailwind CSS | ^4.0.7 |
-| Routing | react-router-dom | ^6.22.0 |
-| Icons | lucide-react | ^0.475.0 |
-| Linting | ESLint | ^9.19.0 |
+| Route               | Description                                       |
+|---------------------|---------------------------------------------------|
+| `/`                 | Homepage — hero + previews of all four sections   |
+| `/writing`          | Writing index (links out to Substack, LinkedIn)   |
+| `/work`             | Work index with tag filter                        |
+| `/work/:slug`       | Individual case study page                        |
+| `/projects`         | Side projects index                               |
+| `/projects/:slug`   | Individual project page                           |
+| `/community`        | Community index (hackathons, talks, meetups)      |
 
-### Pages & Routes
-| Route | Component | Description |
-|-------|-----------|-------------|
-| `/` | HeroSection | Landing page with tagline and main navigation |
-| `/Essays` | Essays | List of 5 published essays |
-| `/Essays/a-call-to-defend-democracy` | ACalltoDefendDemocracy | Essay on defending democracy |
-| `/Essays/algorithms-of-mass-division` | AlgorithmsOfMassDivision | Essay on social division algorithms |
-| `/Essays/democraTech:-rebuilding-the-bridge-between-citizens-&-policy` | DemocraTech | Essay on democracy and technology |
-| `/Essays/distortion-machine` | DistortionMachine | Essay on information distortion |
-| `/Essays/post-platform-social-internet` | PostPlatformSocialInternet | Essay on post-platform social internet |
-| `/Products` | Products | List of products (Polaris consensus platform) |
-| `/Interviews` | Interviews | List of interviews (YouTube links) |
+## Design system
 
-### Key Features
-- **Responsive Design**: Mobile-friendly layout using Tailwind CSS
-- **Dynamic Routing**: React Router for SPA navigation
-- **Consistent Styling**: Playfair Display font family throughout
-- **Hover Effects**: Subtle color transitions on interactive elements
-- **Back Navigation**: Arrow icons for returning to previous pages
+- **Colors:** OKLCH throughout; four orb palettes (hero, writing, work, projects, community)
+- **Fonts:** Gloock (hero display only) + Onest variable (everything else)
+- **Orbs:** Radial gradient divs, `filter: blur(80px)`, animated with CSS keyframes; one per section, each bleeding off a different edge
+- **Tokens:** `src/index.css` root variables — type scale, spacing, z-index, easing
 
-### Available Scripts
-```console
-npm run dev      # Start development server
-npm run build    # Build for production
-npm run lint     # Run ESLint
-npm run preview  # Preview production build
-``
+---
+
+## Backlog
+
+### Writing
+
+- [ ] Replace placeholder `href="#"` links with real Substack URLs
+- [ ] Build out `/writing` index page with full list of posts
+- [ ] Add LinkedIn and Twitter/X as platform badge options alongside Substack
+- [ ] Support filtering by platform on the `/writing` page
+
+---
+
+### Work
+
+The work section covers three distinct types of engagements, each tagged:
+
+1. **Internal enablement** — Training and upskilling colleagues to use AI effectively across data, creative, strategy, and value engineering roles
+2. **Client work** — End-to-end workflow transformations: process mapping, identifying agentic moments, building and deploying solutions with the Agentic Lab product engineering team
+3. **Inspiration sessions** — Forward-looking presentations on the future of customer experiences: generative engine optimization (GEO), branded ChatGPT-powered experiences, branded voice agents
+
+**Planned work page features:**
+
+- [ ] Build `/work` index page with a feed-style list of case studies
+- [ ] Add tag system: each item tagged with one of `Internal enablement`, `Client work`, or `Inspiration session`
+- [ ] Add three filter buttons at the top of the `/work` page — clicking one filters the feed to that tag only; all three active by default (show all)
+- [ ] Build individual `/work/:slug` case study pages with anonymized project details
+- [ ] Populate with real (anonymized) projects across all three categories
+
+---
+
+### Projects
+
+- [ ] Build `/projects` index page
+- [ ] Build individual `/projects/:slug` pages with product screenshots and demo links
+- [ ] Replace placeholder items with real side projects
+
+---
+
+### Community
+
+The community section covers organizing and speaking work, primarily through the Google Guild and VML MAP:
+
+**Google Guild / AI Hackathons (organized four so far at VML MAP):**
+1. Hackathon 1 — General onboarding: getting participants hands-on with Google Cloud
+2. Hackathon 2 — Process Automation: building automation tools on Google Cloud
+3. Hackathon 3 — (details to be filled in)
+4. Hackathon 4 — (details to be filled in)
+
+All hackathons share the same goal: hands-on learning with Google Cloud, deploying real applications, and using the AI / Gemini APIs.
+
+The Google Guild itself is a group of Google Cloud enthusiasts who help others learn the technology, get certified, and create videos and presentations showing real-world use cases.
+
+**Planned community page features:**
+
+- [ ] Build `/community` index page with full event list (currently placeholder items on homepage)
+- [ ] Build individual `/community/:slug` pages for each hackathon with full descriptions: format, participants, themes, outcomes, what participants built
+- [ ] Add a tag system: `Organizer` vs `Speaker` (already on homepage preview; carry forward to index)
+- [ ] Add Google Guild as a standing entry with its own description page
+- [ ] Link to LinkedIn posts for events that have them
+- [ ] Replace all placeholder `href="#"` links with real LinkedIn / event page URLs
+
+---
+
+### Global / infrastructure
+
+- [ ] Set up deployment (Vercel or Netlify recommended for Vite SPA)
+- [ ] Add `og:image`, `og:title`, `og:description` meta tags per page for social sharing
+- [ ] Add favicon
+- [ ] Confirm `npm run dev` works after clean `node_modules` install (rollup optional deps bug — fixed once; may recur after future npm installs)

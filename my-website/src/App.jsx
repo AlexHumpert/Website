@@ -29,6 +29,7 @@ function App() {
         <Route path="/work/:slug" element={<ComingSoon title="Case Study" />} />
         <Route path="/projects" element={<ComingSoon title="Projects" />} />
         <Route path="/projects/:slug" element={<ComingSoon title="Project" />} />
+        <Route path="/community" element={<ComingSoon title="Community" />} />
       </Routes>
     </Router>
   );

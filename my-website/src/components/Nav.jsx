@@ -17,6 +17,7 @@ export default function Nav() {
         <li><Link to="/writing">Writing</Link></li>
         <li><Link to="/work">Work</Link></li>
         <li><Link to="/projects">Projects</Link></li>
+        <li><Link to="/community">Community</Link></li>
       </ul>
     </nav>
   );
