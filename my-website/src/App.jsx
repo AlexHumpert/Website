@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav';
 import HomePage from './components/HomePage';
+import WorkPage from './components/WorkPage';
 
 // Placeholder pages — to be built out
 function ComingSoon({ title }) {
@@ -25,7 +26,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/writing" element={<ComingSoon title="Writing" />} />
-        <Route path="/work" element={<ComingSoon title="Work" />} />
+        <Route path="/work" element={<WorkPage />} />
         <Route path="/work/:slug" element={<ComingSoon title="Case Study" />} />
         <Route path="/projects" element={<ComingSoon title="Projects" />} />
         <Route path="/projects/:slug" element={<ComingSoon title="Project" />} />

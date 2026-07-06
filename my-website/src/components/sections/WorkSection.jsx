@@ -3,22 +3,24 @@ import Orb from '../Orb';
 
 const ITEMS = [
   {
-    title: 'Market Intelligence Platform',
-    description: 'Redesigning how an analyst team accesses and acts on competitive data',
-    year: '2024',
-    slug: 'market-intelligence',
+    title: 'VML MAP',
+    description: 'Junior Cloud Engineer → AI Solution Consultant → Lead AI Solution Consultant, now running internal AI enablement',
+    year: '2024 — Now',
   },
   {
-    title: 'Operational Workflow Automation',
-    description: 'Reducing manual process overhead across a 200-person operations function',
-    year: '2023',
-    slug: 'workflow-automation',
+    title: 'Wunderman Thompson MAP',
+    description: 'Junior Data Strategist, then Junior Cloud Engineer on the Cloud & AI team',
+    year: '2022 — 24',
   },
   {
-    title: 'Consumer Research Infrastructure',
-    description: 'Building the data layer that connects qualitative insight to product decisions',
-    year: '2022',
-    slug: 'research-infrastructure',
+    title: 'The International Legal Foundation',
+    description: 'Legal and data analytics internships at a justice-focused NGO in New York',
+    year: '2019 — 20',
+  },
+  {
+    title: 'Launch22 & PostBug',
+    description: 'Marketing and strategy internships in London, where it all started',
+    year: '2018',
   },
 ];
 
@@ -49,8 +51,8 @@ export default function WorkSection() {
         <div style={{ maxWidth: '760px' }}>
           {ITEMS.map((item) => (
             <Link
-              key={item.slug}
-              to={`/work/${item.slug}`}
+              key={item.title}
+              to="/work"
               className="portfolio-item"
               aria-label={item.title}
             >
@@ -66,7 +68,7 @@ export default function WorkSection() {
         </div>
 
         <Link to="/work" className="view-all">
-          View all work
+          View the full timeline
           <span className="arrow-icon" aria-hidden="true">→</span>
         </Link>
       </div>
