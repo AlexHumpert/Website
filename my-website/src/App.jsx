@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Nav from './components/Nav';
 import HomePage from './components/HomePage';
 import WorkPage from './components/WorkPage';
+import CommunityPage from './components/CommunityPage';
 
 // Placeholder pages — to be built out
 function ComingSoon({ title }) {
@@ -30,7 +31,7 @@ function App() {
         <Route path="/work/:slug" element={<ComingSoon title="Case Study" />} />
         <Route path="/projects" element={<ComingSoon title="Projects" />} />
         <Route path="/projects/:slug" element={<ComingSoon title="Project" />} />
-        <Route path="/community" element={<ComingSoon title="Community" />} />
+        <Route path="/community" element={<CommunityPage />} />
       </Routes>
     </Router>
   );

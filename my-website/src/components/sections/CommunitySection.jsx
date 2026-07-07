@@ -3,32 +3,28 @@ import Orb from '../Orb';
 
 const EVENTS = [
   {
-    title: 'AI Hackathon — Placeholder City',
+    title: 'Google Guild HackNight #4 — Agentic Consumer Experiences',
     type: 'Organizer',
-    date: 'Jun 2025',
-    description: 'Brought together 80 developers and designers to build AI-powered tools over 48 hours.',
-    href: '#',
+    date: 'Jun 2026',
+    href: 'https://www.linkedin.com/posts/rokasgarlauskas_hacknight-ai-vmlmap-share-7467453319935094784-gkag/',
   },
   {
-    title: 'Talk: AI in the Enterprise — Placeholder Conference',
+    title: 'Google Guild HackNight #3 — Project Orchestrator Agents',
+    type: 'Organizer',
+    date: 'Nov 2025',
+    href: 'https://www.linkedin.com/posts/vml-map_what-happens-when-you-bring-project-managers-activity-7402262839056416768-jV4I/',
+  },
+  {
+    title: 'WPP Converge — Scaling Agentic AI',
     type: 'Speaker',
+    date: 'Sep 2025',
+    href: 'https://www.linkedin.com/posts/wppconverge-vmlmap-agenticai-share-7371916365701652480-B8AH/',
+  },
+  {
+    title: 'Google Guild HackNight #2 — Talk-to-Data Agents',
+    type: 'Organizer',
     date: 'Apr 2025',
-    description: 'Keynote on practical AI adoption patterns for operations teams.',
-    href: '#',
-  },
-  {
-    title: 'Monthly Coding Meetup',
-    type: 'Organizer',
-    date: 'Ongoing',
-    description: 'Running a recurring meetup for builders and operators interested in applied AI.',
-    href: '#',
-  },
-  {
-    title: 'Talk: Building with LLMs — Placeholder Summit',
-    type: 'Speaker',
-    date: 'Feb 2025',
-    description: 'How to move from prototype to production when the model is part of your stack.',
-    href: '#',
+    href: 'https://www.linkedin.com/posts/vml-map_ai-innovation-hackathon-activity-7312771547276939264-LkEm/',
   },
 ];
 
