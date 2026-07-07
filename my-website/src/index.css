@@ -468,6 +468,130 @@ body {
   margin: 0;
 }
 
+/* ── Work timeline — case studies ───────────────────────────────────────── */
+.timeline-case-block {
+  margin-top: var(--space-8);
+}
+.timeline-cases-label {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 var(--space-3);
+}
+.timeline-case-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.case-pill {
+  border: 1px solid color-mix(in oklch, var(--era-accent) 45%, transparent);
+  color: var(--era-accent);
+  background: transparent;
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 200ms var(--ease-out-quart),
+              color 200ms var(--ease-out-quart),
+              border-color 200ms var(--ease-out-quart);
+}
+.case-pill:hover {
+  background: color-mix(in oklch, var(--era-accent) 12%, transparent);
+}
+.case-pill.active {
+  background: var(--era-accent);
+  border-color: var(--era-accent);
+  color: oklch(1.000 0.000 0);
+}
+
+.timeline-cases {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 500ms var(--ease-out-quart);
+}
+.timeline-cases.open {
+  grid-template-rows: 1fr;
+}
+.timeline-cases-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.timeline-case {
+  padding: var(--space-8) 0;
+  border-bottom: 1px solid color-mix(in oklch, var(--era-accent) 20%, transparent);
+}
+.timeline-case:first-child {
+  margin-top: var(--space-6);
+  border-top: 1px solid color-mix(in oklch, var(--era-accent) 20%, transparent);
+}
+.timeline-case-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.timeline-case-status {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--era-accent);
+}
+.timeline-case-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 400;
+  color: var(--ink);
+  margin: var(--space-4) 0 var(--space-3);
+  text-wrap: balance;
+}
+.timeline-case-desc {
+  font-size: var(--text-sm);
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 58ch;
+  margin: 0;
+}
+.timeline-case-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-top: var(--space-6);
+}
+.timeline-case-stat-value {
+  font-size: var(--text-2xl);
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.timeline-case-stat-label {
+  font-size: var(--text-xs);
+  color: var(--muted);
+  max-width: 22ch;
+  margin-top: var(--space-1);
+}
+.timeline-cases-close {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--era-accent);
+  cursor: pointer;
+}
+.timeline-cases-close:hover { opacity: 0.7; }
+
 /* ── Community — LinkedIn embeds ────────────────────────────────────────── */
 .community-event-about {
   max-width: 44ch;

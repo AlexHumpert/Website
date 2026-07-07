@@ -12,14 +12,81 @@ const ERAS = [
     accent: 'oklch(0.560 0.170 30)',
     roles: [
       {
-        title: 'Lead AI Solution Consultant',
+        title: 'Lead AI Solutions Consultant — Agentic Lab',
         meta: 'Jan 2026 — Present',
         summary:
-          'Now running internal AI enablement — building the capability, tooling and ways of working that bring AI into everyday practice across the organization.',
+          'Part of the Agentic Lab — the team building bespoke agentic AI for Fortune 500 clients — operating across the full deployment lifecycle, from executive discovery and presales through prototype, pilot and production. Alongside client work, running internal AI enablement across the organization.',
         bullets: [
-          'Leading internal AI enablement across the organization',
-          'Driving adoption of AI tooling and new ways of working across teams and disciplines',
-          'Continuing to advise senior stakeholders on enterprise AI strategy',
+          'Leading AI enablement for internal Claude across 150 pilot FTEs, deploying enterprise AI tooling with training programs for specialist consulting teams',
+          'Built VML MAP’s agentic AI delivery methodology — playbooks, hackathons and training across a 400+ person marketing operations organization',
+          'Developing and defending financial models, value trees and ROI business cases to secure investment approval for AI initiatives',
+        ],
+        projects: [
+          {
+            id: 'text-to-sql',
+            pill: 'Talk-to-data · Global retail',
+            tag: 'Global home furnishings retailer',
+            status: 'In production',
+            title: 'A translator between marketers and their data',
+            description:
+              'An AI text-to-SQL translator that lets CRM teams query campaign data in plain language. Designed the evaluation framework, benchmarked competing models, engineered few-shot prompts and iterated with end users — now deployed globally across all of the client’s CRM email campaigns, powering hundreds of millions of messages a month.',
+            stats: [
+              { value: '99.9%', label: 'accuracy on 80% of use-cases' },
+              { value: '70%', label: 'less time writing queries' },
+              { value: '100M+', label: 'messages powered monthly' },
+            ],
+          },
+          {
+            id: 'brand-governance',
+            pill: 'Brand governance · Global automotive',
+            tag: 'Global automotive manufacturer',
+            status: 'Pilot',
+            title: 'Brand governance at scale',
+            description:
+              'An AI brand governance agent that reviews marketing assets for compliance across 18 markets. Led the engagement from discovery through pilot — designing the evaluation harness and defining the compliance scoring logic.',
+            stats: [
+              { value: '28% → 80%', label: 'asset review coverage, 18 markets' },
+              { value: '$5.5M → $0.7M', label: 'projected annual review cost' },
+              { value: '+$30M', label: 'projected media effectiveness uplift' },
+            ],
+          },
+          {
+            id: 'north-star',
+            pill: 'AI North Star · Global automotive',
+            tag: 'Global automotive manufacturer · EMEA',
+            status: '$300K engagement',
+            title: 'An AI North Star for EMEA',
+            description:
+              'Pitched directly to the regional CMO to secure the engagement. Facilitated an AI North Star workshop with market directors from the five largest European markets to align on a three-year AI vision anchored in business KPIs, then led end-to-end discovery across 18 markets — surfacing 10+ AI use-cases and prioritizing down to three flagship opportunities. Scoped and closed a $300K engagement staffing 15 specialists.',
+            stats: [
+              { value: '18', label: 'markets in discovery' },
+              { value: '10+', label: 'AI use-cases surfaced' },
+              { value: '15', label: 'specialists staffed' },
+            ],
+          },
+          {
+            id: 'insights-agent',
+            pill: 'Data insights agent · Global beverage',
+            tag: 'Global beverage company',
+            status: '$150K engagement',
+            title: 'A data insights agent for global digital teams',
+            description:
+              'Defined the problem space, scoped the resource model, and presented the solution architecture to senior global digital capability stakeholders to secure engagement sign-off for an AI-powered data insights agent.',
+            stats: [{ value: '$150K', label: 'engagement secured' }],
+          },
+          {
+            id: 'enablement',
+            pill: 'AI enablement · Internal',
+            tag: 'VML MAP · Internal',
+            status: 'Ongoing',
+            title: 'AI enablement from within',
+            description:
+              'Built VML MAP’s agentic AI delivery methodology — authoring playbooks and delivering hackathons and training programs across a 400+ person marketing operations organization. Now leading Claude enablement across 150 pilot FTEs and designing training for specialist teams in business architecture, experience strategy and design, value engineering and business development.',
+            stats: [
+              { value: '400+', label: 'people reached through training' },
+              { value: '150', label: 'pilot FTEs on Claude' },
+            ],
+          },
         ],
       },
       {
@@ -160,7 +227,28 @@ const ERAS = [
 
 export default function WorkPage() {
   const [activeId, setActiveId] = useState(ERAS[0].id);
+  const [openRole, setOpenRole] = useState(null);
+  const [activeCase, setActiveCase] = useState(null);
   const eraRefs = useRef({});
+
+  const toggleCase = (roleTitle, caseId) => {
+    if (openRole === roleTitle && activeCase === caseId) {
+      setOpenRole(null);
+      setActiveCase(null);
+      return;
+    }
+    const wasClosed = openRole !== roleTitle;
+    setOpenRole(roleTitle);
+    setActiveCase(caseId);
+    setTimeout(
+      () => {
+        document
+          .getElementById(`case-${caseId}`)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      },
+      wasClosed ? 450 : 50
+    );
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -248,6 +336,76 @@ export default function WorkPage() {
                         <li key={bullet}>{bullet}</li>
                       ))}
                     </ul>
+
+                    {role.projects && (
+                      <div className="timeline-case-block">
+                        <p className="timeline-cases-label">Selected cases</p>
+                        <div className="timeline-case-pills">
+                          {role.projects.map((project) => (
+                            <button
+                              key={project.id}
+                              type="button"
+                              className={`case-pill${
+                                openRole === role.title && activeCase === project.id
+                                  ? ' active'
+                                  : ''
+                              }`}
+                              onClick={() => toggleCase(role.title, project.id)}
+                              aria-expanded={openRole === role.title && activeCase === project.id}
+                            >
+                              {project.pill}
+                            </button>
+                          ))}
+                        </div>
+
+                        <div
+                          className={`timeline-cases${openRole === role.title ? ' open' : ''}`}
+                        >
+                          <div className="timeline-cases-inner">
+                            {role.projects.map((project) => (
+                              <article
+                                key={project.id}
+                                id={`case-${project.id}`}
+                                className="timeline-case"
+                              >
+                                <div className="timeline-case-head">
+                                  <span className="badge">{project.tag}</span>
+                                  <span className="timeline-case-status">
+                                    {project.status}
+                                  </span>
+                                </div>
+                                <h4 className="timeline-case-title">{project.title}</h4>
+                                <p className="timeline-case-desc">{project.description}</p>
+                                {project.stats && (
+                                  <div className="timeline-case-stats">
+                                    {project.stats.map((stat) => (
+                                      <div key={stat.label} className="timeline-case-stat">
+                                        <div className="timeline-case-stat-value">
+                                          {stat.value}
+                                        </div>
+                                        <div className="timeline-case-stat-label">
+                                          {stat.label}
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </article>
+                            ))}
+                            <button
+                              type="button"
+                              className="timeline-cases-close"
+                              onClick={() => {
+                                setOpenRole(null);
+                                setActiveCase(null);
+                              }}
+                            >
+                              Collapse cases ↑
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </article>
                 ))}
               </div>
