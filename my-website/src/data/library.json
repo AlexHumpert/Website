@@ -1,6 +1,22 @@
 [
   {
     "type": "video",
+    "title": "Why Nobody Has Solved Continual Learning",
+    "source": "LangChain",
+    "url": "https://www.youtube.com/watch?v=whnDiwcL4HE",
+    "youtubeId": "whnDiwcL4HE",
+    "date": "2026-10-25"
+  },
+  {
+    "type": "video",
+    "title": "Claude for Long-Horizon Tasks — Lance Martin, Anthropic",
+    "source": "AI Engineer",
+    "url": "https://www.youtube.com/watch?v=9QebvrrY3KY",
+    "youtubeId": "9QebvrrY3KY",
+    "date": "2026-10-25"
+  },
+  {
+    "type": "video",
     "title": "How Companies Are Building Their Own Intelligence | Sonya Huang, Sequoia Capital",
     "source": "Sequoia Capital",
     "url": "https://www.youtube.com/watch?v=bMMv0bZzONg",
