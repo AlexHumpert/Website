@@ -1,6 +1,14 @@
 [
   {
     "type": "video",
+    "title": "How Harvey Built a Research Lab on a Budget | Gabe Pereyra",
+    "source": "Sequoia Capital",
+    "url": "https://www.youtube.com/watch?v=MGouk8W51v0",
+    "youtubeId": "MGouk8W51v0",
+    "date": "2026-10-25"
+  },
+  {
+    "type": "video",
     "title": "Why Nobody Has Solved Continual Learning",
     "source": "LangChain",
     "url": "https://www.youtube.com/watch?v=whnDiwcL4HE",
