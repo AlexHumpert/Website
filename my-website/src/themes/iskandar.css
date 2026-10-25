@@ -1,0 +1,185 @@
+/* ── Iskandar theme ─────────────────────────────────────────────────────────
+   Alex's Iskandar design system mapped onto the site. Opt in with
+   ?theme=iskandar (persists), opt out with ?theme=default.
+   Rules carried over: night is the ground, parchment text, gold once per
+   view, pastels only for structure, serif speaks / sans explains, the lens
+   (two circles, gold where they meet) as the mark and the primitive. */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=IBM+Plex+Sans:wght@400;500&display=swap');
+
+:root[data-theme='iskandar'] {
+  /* Iskandar tokens */
+  --night:           #14120e;
+  --night-raised:    #1f1c16;
+  --line:            #3a352c;
+  --parchment:       #f1e8d6;
+  --parchment-muted: #a69c88;
+  --gold:            #c9a24a;
+  --sage:            #a9c2b0;
+  --lapis-mist:      #a7b8d8;
+  --apricot:         #e8c4a0;
+  --sand:            #d9cfae;
+  --clay:            #c4907a;
+
+  /* Site tokens, re-pointed */
+  --bg:         var(--night);
+  --surface:    var(--night-raised);
+  --border:     var(--line);
+  --ink:        var(--parchment);
+  --muted:      var(--parchment-muted);
+  --primary:    var(--gold);
+  --primary-fg: var(--night);
+
+  --font-display: 'Cormorant Garamond', Garamond, Georgia, serif;
+  --font-body:    'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  color-scheme: dark;
+}
+
+/* The lens, as a data URI so pseudo-elements can carry it. */
+:root[data-theme='iskandar'] {
+  --lens: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 20'%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Ccircle cx='11' cy='10' r='8.5'/%3E%3C/clipPath%3E%3C/defs%3E%3Ccircle cx='23' cy='10' r='8.5' fill='%23c9a24a' clip-path='url(%23a)'/%3E%3Ccircle cx='11' cy='10' r='8.5' fill='none' stroke='%23f1e8d6' stroke-width='1.4'/%3E%3Ccircle cx='23' cy='10' r='8.5' fill='none' stroke='%23f1e8d6' stroke-width='1.4'/%3E%3C/svg%3E");
+}
+
+/* ── Ground ─────────────────────────────────────────────────────────────── */
+[data-theme='iskandar'] .timeline-bg {
+  background-color: var(--night) !important;
+}
+[data-theme='iskandar'] ::selection {
+  background: var(--gold);
+  color: var(--night);
+}
+
+/* ── Nav: lens mark beside the name ─────────────────────────────────────── */
+[data-theme='iskandar'] .site-nav.scrolled {
+  background: rgb(20 18 14 / 0.72);
+}
+[data-theme='iskandar'] .nav-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+[data-theme='iskandar'] .nav-name::before {
+  content: '';
+  width: 30px;
+  height: 18px;
+  background: var(--lens) center / contain no-repeat;
+}
+
+/* ── Serif speaks ───────────────────────────────────────────────────────── */
+[data-theme='iskandar'] .section-heading {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(3.2rem, 2.6rem + 2.4vw, 5rem);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+[data-theme='iskandar'] .timeline-company-name {
+  font-weight: 500;
+  font-size: clamp(2.4rem, 2.1rem + 1vw, 3.1rem);
+  line-height: 1.02;
+}
+[data-theme='iskandar'] .timeline-role-title,
+[data-theme='iskandar'] .timeline-case-title,
+[data-theme='iskandar'] .library-entry-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 1.45rem + 0.6vw, 2rem);
+  line-height: 1.1;
+}
+[data-theme='iskandar'] .timeline-case-stat-value {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.2rem, 1.9rem + 1vw, 2.8rem);
+  letter-spacing: 0;
+  line-height: 1;
+}
+[data-theme='iskandar'] .timeline-intro-text {
+  font-weight: 400;
+}
+
+/* ── Gold happens once: the eyebrow label ───────────────────────────────── */
+[data-theme='iskandar'] .timeline-kicker {
+  color: var(--gold);
+  letter-spacing: 0.16em;
+}
+[data-theme='iskandar'] .timeline-company-dates,
+[data-theme='iskandar'] .timeline-cases-label {
+  letter-spacing: 0.16em;
+}
+
+/* ── Pastels support, in order ──────────────────────────────────────────── */
+[data-theme='iskandar'] .timeline-era:nth-of-type(5n + 1) { --era-accent: var(--sage) !important; }
+[data-theme='iskandar'] .timeline-era:nth-of-type(5n + 2) { --era-accent: var(--lapis-mist) !important; }
+[data-theme='iskandar'] .timeline-era:nth-of-type(5n + 3) { --era-accent: var(--apricot) !important; }
+[data-theme='iskandar'] .timeline-era:nth-of-type(5n + 4) { --era-accent: var(--sand) !important; }
+[data-theme='iskandar'] .timeline-era:nth-of-type(5n + 5) { --era-accent: var(--clay) !important; }
+
+[data-theme='iskandar'] .timeline-nav button:nth-of-type(5n + 1) { --nav-accent: var(--sage) !important; }
+[data-theme='iskandar'] .timeline-nav button:nth-of-type(5n + 2) { --nav-accent: var(--lapis-mist) !important; }
+[data-theme='iskandar'] .timeline-nav button:nth-of-type(5n + 3) { --nav-accent: var(--apricot) !important; }
+[data-theme='iskandar'] .timeline-nav button:nth-of-type(5n + 4) { --nav-accent: var(--sand) !important; }
+[data-theme='iskandar'] .timeline-nav button:nth-of-type(5n + 5) { --nav-accent: var(--clay) !important; }
+[data-theme='iskandar'] .timeline-nav button {
+  background: rgb(241 232 214 / 0.18);
+}
+[data-theme='iskandar'] .timeline-nav button:hover {
+  background: rgb(241 232 214 / 0.4);
+}
+
+/* ── The lens as primitive: outlined circles on the spine ───────────────── */
+[data-theme='iskandar'] .timeline-roles {
+  border-left-color: var(--line);
+}
+[data-theme='iskandar'] .timeline-role::before,
+[data-theme='iskandar'] .library-entry::before {
+  width: 13px;
+  height: 13px;
+  left: calc(-1 * var(--space-8) - 6.5px);
+  background: var(--night);
+  border: 2px solid var(--era-accent);
+}
+[data-theme='iskandar'] .timeline-end-dot {
+  width: 51px;
+  height: 30px;
+  border-radius: 0;
+  background: var(--lens) center / contain no-repeat;
+}
+
+/* ── Panels on night-raised, radius-sm ──────────────────────────────────── */
+[data-theme='iskandar'] .badge {
+  border-radius: 6px;
+  background: var(--night-raised);
+  color: var(--parchment-muted);
+  border: 1px solid var(--line);
+}
+[data-theme='iskandar'] .timeline-case {
+  border-color: var(--line);
+}
+[data-theme='iskandar'] .case-pill.active {
+  color: var(--night);
+}
+[data-theme='iskandar'] .library-video {
+  border-radius: 6px;
+  background: var(--night-raised);
+  outline: 1px solid var(--line);
+}
+[data-theme='iskandar'] .library-entry-image {
+  border-radius: 0;
+}
+[data-theme='iskandar'] .library-play {
+  background: rgb(20 18 14 / 0.78);
+  color: var(--parchment);
+  outline: 1.5px solid var(--parchment);
+}
+[data-theme='iskandar'] .library-entry-note {
+  border-left: none;
+  padding-left: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--parchment);
+}
