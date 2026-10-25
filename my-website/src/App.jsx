@@ -3,6 +3,7 @@ import Nav from './components/Nav';
 import HomePage from './components/HomePage';
 import WorkPage from './components/WorkPage';
 import CommunityPage from './components/CommunityPage';
+import LibraryPage from './components/LibraryPage';
 
 // Placeholder pages — to be built out
 function ComingSoon({ title }) {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/projects" element={<ComingSoon title="Projects" />} />
         <Route path="/projects/:slug" element={<ComingSoon title="Project" />} />
         <Route path="/community" element={<CommunityPage />} />
+        <Route path="/library" element={<LibraryPage />} />
       </Routes>
     </Router>
   );

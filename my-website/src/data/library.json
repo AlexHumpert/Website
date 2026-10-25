@@ -1,0 +1,48 @@
+[
+  {
+    "type": "video",
+    "title": "How Companies Are Building Their Own Intelligence | Sonya Huang, Sequoia Capital",
+    "source": "Sequoia Capital",
+    "url": "https://www.youtube.com/watch?v=bMMv0bZzONg",
+    "youtubeId": "bMMv0bZzONg",
+    "date": "2026-10-25"
+  },
+  {
+    "type": "article",
+    "title": "Machines of Loving Grace",
+    "source": "Dario Amodei",
+    "url": "https://darioamodei.com/machines-of-loving-grace",
+    "excerpt": "How AI could transform the world for the better.",
+    "image": "https://cdn.prod.website-files.com/67ecbba31246a69e485fdd4b/6814ea4333d8e47f3e36f811_og_machines-of-loving-grace.jpg",
+    "date": "2026-10-12",
+    "note": "Sample entry — delete me.",
+    "sample": true
+  },
+  {
+    "type": "video",
+    "title": "Andrej Karpathy: Software Is Changing (Again)",
+    "source": "Y Combinator",
+    "url": "https://www.youtube.com/watch?v=LCEmiRjPEtQ",
+    "youtubeId": "LCEmiRjPEtQ",
+    "date": "2026-09-28",
+    "note": "Sample entry — delete me.",
+    "sample": true
+  },
+  {
+    "type": "article",
+    "title": "How to Do Great Work",
+    "source": "Paul Graham",
+    "url": "https://paulgraham.com/greatwork.html",
+    "date": "2026-09-14",
+    "sample": true
+  },
+  {
+    "type": "video",
+    "title": "[1hr Talk] Intro to Large Language Models",
+    "source": "Andrej Karpathy",
+    "url": "https://www.youtube.com/watch?v=zjkBMFhNj_g",
+    "youtubeId": "zjkBMFhNj_g",
+    "date": "2026-08-30",
+    "sample": true
+  }
+]

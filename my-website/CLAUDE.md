@@ -36,6 +36,11 @@ Case studies of professional projects, made platform/company-agnostic. Each proj
 ### `/projects` — Side Projects
 Personal and entrepreneurial side projects. Each gets its own page (`/projects/[slug]`). Format similar to work portfolio.
 
+### `/library` — Watching & reading log
+A timeline (grouped by month, newest first, infinite scroll) of YouTube videos and articles Alexander has watched or read. Data lives in `src/data/library.json`.
+
+**Workflow:** when Alexander pastes a YouTube or article link (optionally with a short take), run `npm run add -- "<url>" "<optional note>"` from `my-website/`. It fetches title/source/thumbnail (YouTube oEmbed or Open Graph tags), stamps today's date, and prepends the entry. Entries with `"sample": true` are demo content shown only in dev — delete them once real entries exist.
+
 ## Design Direction
 
 - **Voice:** Editorial, curious, personal — not political
