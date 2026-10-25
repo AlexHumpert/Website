@@ -28,8 +28,18 @@
   --orb-projects-outer:  oklch(0.670 0.160 30);
 
   /* Typography */
-  --font-display: 'Gloock', Georgia, serif;
-  --font-body:    'Onest', system-ui, sans-serif;
+  --font-display: 'Cormorant Garamond', Garamond, Georgia, serif;
+  --font-body:    'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Iskandar pastels — shared by light and dark */
+  --sage:       #a9c2b0;
+  --lapis-mist: #a7b8d8;
+  --apricot:    #e8c4a0;
+  --sand:       #d9cfae;
+  --clay:       #c4907a;
+  --gold:       #c9a24a;
+  --night:      #14120e;
+
 
   /* Type scale — fluid, major-third ratio */
   --text-xs:   clamp(0.694rem, 0.67rem + 0.12vw,  0.75rem);
@@ -66,6 +76,14 @@
   /* Easing */
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
   --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Pastels are too light for text on white, so text tinted by a section's
+   pastel uses a deeper shade of the same hue (dark mode uses it as is).
+   Declared where --era-accent is set, so it resolves per section. */
+.timeline-era,
+[style*='--era-accent'] {
+  --era-ink: color-mix(in oklch, var(--era-accent) 55%, black);
 }
 
 /* ── Reset & base ───────────────────────────────────────────────────────── */
@@ -131,6 +149,9 @@ body {
   backdrop-filter: blur(16px) saturate(1.2);
 }
 .nav-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 500;
@@ -143,7 +164,7 @@ body {
   display: flex;
   gap: var(--space-8);
   list-style: none;
-  margin: 0;
+  margin: 0 0 0 auto;
   padding: 0;
 }
 .nav-links a {
@@ -156,6 +177,38 @@ body {
 }
 .nav-links a:hover { color: var(--ink); }
 
+.nav-lens {
+  width: 30px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--ink);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-left: var(--space-6);
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 150ms ease, border-color 150ms ease, transform 150ms var(--ease-out-quart);
+}
+.theme-toggle:hover {
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.theme-toggle:active { transform: scale(0.94); }
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 /* Phones: links drop to their own row under the name, spread edge to edge. */
 @media (max-width: 640px) {
   .site-nav {
@@ -165,7 +218,15 @@ body {
     padding-top: var(--space-4);
     padding-bottom: var(--space-4);
   }
+  .nav-name { align-self: flex-start; }
+  .theme-toggle {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--container-pad);
+    margin-left: 0;
+  }
   .nav-links {
+    margin-left: 0;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: var(--space-2) var(--space-4);
@@ -286,6 +347,18 @@ body {
   text-wrap: balance;
 }
 
+/* ── Coming soon placeholder ────────────────────────────────────────────── */
+.coming-soon-line {
+  max-width: 760px;
+  margin: 0;
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  font-size: var(--text-lg);
+  font-weight: 300;
+  color: var(--muted);
+}
+
 /* ── View all link ──────────────────────────────────────────────────────── */
 .view-all {
   display: inline-flex;
@@ -360,7 +433,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--era-accent);
+  color: var(--era-ink);
   margin: 0 0 var(--space-3);
 }
 .timeline-company-name {
@@ -438,7 +511,7 @@ body {
   margin-bottom: var(--space-2);
 }
 .timeline-role-list li::marker {
-  color: var(--era-accent);
+  color: var(--era-ink);
 }
 
 .timeline-nav {
@@ -507,7 +580,7 @@ body {
 }
 .case-pill {
   border: 1px solid color-mix(in oklch, var(--era-accent) 45%, transparent);
-  color: var(--era-accent);
+  color: var(--era-ink);
   background: transparent;
   border-radius: 100px;
   padding: 6px 14px;
@@ -560,7 +633,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--era-accent);
+  color: var(--era-ink);
 }
 .timeline-case-title {
   font-family: var(--font-display);
@@ -607,7 +680,7 @@ body {
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 500;
-  color: var(--era-accent);
+  color: var(--era-ink);
   cursor: pointer;
 }
 .timeline-cases-close:hover { opacity: 0.7; }
@@ -636,7 +709,7 @@ body {
   gap: var(--space-2);
   font-size: var(--text-sm);
   font-weight: 500;
-  color: var(--era-accent);
+  color: var(--era-ink);
   text-decoration: none;
   transition: gap 200ms var(--ease-out-quart);
 }
@@ -727,7 +800,7 @@ body {
   align-items: center;
   justify-content: center;
   padding-left: 3px;
-  color: var(--era-accent);
+  color: var(--era-ink);
   background: oklch(1.000 0.000 0 / 0.88);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
@@ -759,7 +832,7 @@ body {
   text-decoration: none;
   transition: color 150ms ease;
 }
-.library-entry-title a:hover { color: var(--era-accent); }
+.library-entry-title a:hover { color: var(--era-ink); }
 .library-entry-excerpt {
   font-size: var(--text-sm);
   color: var(--muted);

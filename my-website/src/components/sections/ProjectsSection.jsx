@@ -1,20 +1,4 @@
-import { Link } from 'react-router-dom';
 import Orb from '../Orb';
-
-const ITEMS = [
-  {
-    title: 'Placeholder Project One',
-    description: 'A short description of what this project does and why it exists',
-    year: '2025',
-    slug: 'project-one',
-  },
-  {
-    title: 'Placeholder Project Two',
-    description: 'Another project with a brief explanation of the problem it solves',
-    year: '2024',
-    slug: 'project-two',
-  },
-];
 
 export default function ProjectsSection() {
   return (
@@ -40,29 +24,7 @@ export default function ProjectsSection() {
       <div className="container" style={{ position: 'relative', zIndex: 'var(--z-content)' }}>
         <h2 className="section-heading">Projects</h2>
 
-        <div style={{ maxWidth: '760px' }}>
-          {ITEMS.map((item) => (
-            <Link
-              key={item.slug}
-              to={`/projects/${item.slug}`}
-              className="portfolio-item"
-              aria-label={item.title}
-            >
-              <div>
-                <div className="portfolio-item-title">{item.title}</div>
-                <div style={{ fontSize: 'var(--text-sm)', color: 'var(--muted)', marginTop: 'var(--space-2)', maxWidth: '48ch' }}>
-                  {item.description}
-                </div>
-              </div>
-              <span className="portfolio-item-year">{item.year}</span>
-            </Link>
-          ))}
-        </div>
-
-        <Link to="/projects" className="view-all">
-          View all projects
-          <span className="arrow-icon" aria-hidden="true">→</span>
-        </Link>
+        <p className="coming-soon-line">Coming soon</p>
       </div>
     </section>
   );
