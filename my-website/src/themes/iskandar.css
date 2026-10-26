@@ -129,7 +129,7 @@ main > .section:nth-of-type(5) .orb {
   --night-raised:    #1f1c16;
   --line:            #3a352c;
   --parchment:       #f1e8d6;
-  --parchment-muted: #a69c88;
+  --parchment-muted: #c9bfab;
 
   /* Site tokens, re-pointed */
   --bg:         var(--night);
@@ -159,6 +159,13 @@ main > .section:nth-of-type(5) .orb {
 /* Pastels glow brighter on night, so the orbs are softened to keep text legible. */
 [data-theme='iskandar'] .orb {
   opacity: 0.6;
+}
+/* On phones the orbs span the full width and sit right behind the copy,
+   so they are dimmed further there. */
+@media (max-width: 640px) {
+  [data-theme='iskandar'] .orb {
+    opacity: 0.32;
+  }
 }
 
 [data-theme='iskandar'] .site-nav.scrolled {

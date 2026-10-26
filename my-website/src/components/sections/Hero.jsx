@@ -47,7 +47,7 @@ export default function Hero() {
         <p style={{
           fontFamily: 'var(--font-body)',
           fontSize: 'var(--text-lg)',
-          fontWeight: 300,
+          fontWeight: 400,
           color: 'var(--muted)',
           maxWidth: '42ch',
           lineHeight: 1.6,
