@@ -1,5 +1,13 @@
 [
   {
+    "type": "video",
+    "title": "How to Build Agents That Improve Over Time: Model, Harness, Context | Interrupt London",
+    "source": "LangChain",
+    "url": "https://www.youtube.com/watch?v=xy_7SzwsIjM",
+    "youtubeId": "xy_7SzwsIjM",
+    "date": "2026-10-27"
+  },
+  {
     "type": "book",
     "title": "Alexander: God, Man, King",
     "source": "Edmund Richardson",
