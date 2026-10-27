@@ -1,5 +1,12 @@
 [
   {
+    "type": "book",
+    "title": "Alexander: God, Man, King",
+    "source": "Edmund Richardson",
+    "url": "https://www.goodreads.com/search?q=Alexander%3A%20God%2C%20Man%2C%20King%20Edmund%20Richardson",
+    "date": "2026-10-27"
+  },
+  {
     "type": "video",
     "title": "How Bridgewater Built an AI Analyst That Does Hours of Expert Research in Minutes",
     "source": "LangChain",

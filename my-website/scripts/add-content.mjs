@@ -1,15 +1,18 @@
 #!/usr/bin/env node
-// Adds a video or article to the Library page.
+// Adds a video, article or book to the Library page.
 //   npm run add -- <url> ["optional one-line note"]
+//   npm run add -- --book "<title>" "<author>" ["optional one-line note"]
 // YouTube links use oEmbed; everything else is read from the page's Open Graph tags.
 
 import { readFile, writeFile } from 'node:fs/promises';
 
 const DATA_PATH = new URL('../src/data/library.json', import.meta.url);
-const [url, note] = process.argv.slice(2);
+const args = process.argv.slice(2);
+const isBook = args[0] === '--book';
+const [url, note] = isBook ? [] : args;
 
-if (!url) {
-  console.error('Usage: npm run add -- <url> ["note"]');
+if (isBook ? !args[1] || !args[2] : !url) {
+  console.error('Usage: npm run add -- <url> ["note"]\n       npm run add -- --book "<title>" "<author>" ["note"]');
   process.exit(1);
 }
 
@@ -70,10 +73,20 @@ async function fromArticle(link) {
   };
 }
 
-const id = youtubeId(url);
-const entry = id ? await fromYouTube(id) : await fromArticle(url);
+function fromBook(title, author) {
+  return {
+    type: 'book',
+    title,
+    source: author,
+    url: `https://www.goodreads.com/search?q=${encodeURIComponent(`${title} ${author}`)}`,
+  };
+}
+
+const id = isBook ? null : youtubeId(url);
+const entry = isBook ? fromBook(args[1], args[2]) : id ? await fromYouTube(id) : await fromArticle(url);
 entry.date = new Date().toISOString().slice(0, 10);
-if (note) entry.note = note;
+const entryNote = isBook ? args[3] : note;
+if (entryNote) entry.note = entryNote;
 
 const items = JSON.parse(await readFile(DATA_PATH, 'utf8'));
 if (items.some((item) => item.url === entry.url)) {

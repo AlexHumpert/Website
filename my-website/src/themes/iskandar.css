@@ -192,7 +192,8 @@ main > .section:nth-of-type(5) .orb {
   background: var(--night-raised);
   outline: 1px solid var(--line);
 }
-[data-theme='iskandar'] .library-entry-image {
+[data-theme='iskandar'] .library-entry-image,
+[data-theme='iskandar'] .library-entry-cover {
   border-radius: 0;
 }
 [data-theme='iskandar'] .library-play {

@@ -21,7 +21,10 @@ const FILTERS = [
   { id: 'all', label: 'Everything' },
   { id: 'video', label: 'Watched' },
   { id: 'article', label: 'Read' },
+  { id: 'book', label: 'Books' },
 ];
+
+const BADGES = { video: 'Watched', article: 'Read', book: 'Finished' };
 
 const monthLabel = (date) =>
   new Date(`${date}T00:00:00`).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
@@ -82,13 +85,27 @@ function VideoEmbed({ item }) {
   );
 }
 
+// Books without a cover image get a small typographic stand-in.
+function BookCover({ item }) {
+  if (item.image) {
+    return <img className="library-entry-cover" src={item.image} alt="" loading="lazy" />;
+  }
+  return (
+    <div className="library-entry-cover library-entry-cover-type" aria-hidden="true">
+      <span className="library-cover-title">{item.title}</span>
+      <span className="library-cover-author">{item.source}</span>
+    </div>
+  );
+}
+
 function LibraryEntry({ item }) {
   const isVideo = item.type === 'video';
+  const isBook = item.type === 'book';
 
   return (
     <article className={`library-entry library-entry-${item.type}`}>
       <p className="library-entry-meta">
-        <span className="badge">{isVideo ? 'Watched' : 'Read'}</span>
+        <span className="badge">{BADGES[item.type]}</span>
         <span>{item.source}</span>
         <span aria-hidden="true">·</span>
         <time dateTime={item.date}>{dayLabel(item.date)}</time>
@@ -112,12 +129,13 @@ function LibraryEntry({ item }) {
               rel="noopener noreferrer"
               className="community-post-link"
             >
-              Read it
+              {isBook ? 'Find the book' : 'Read it'}
               <span className="arrow-icon" aria-hidden="true">↗</span>
             </a>
           )}
         </div>
-        {!isVideo && item.image && (
+        {isBook && <BookCover item={item} />}
+        {item.type === 'article' && item.image && (
           <img className="library-entry-image" src={item.image} alt="" loading="lazy" />
         )}
       </div>
@@ -194,7 +212,7 @@ export default function LibraryPage() {
             Library
           </h1>
           <p className="timeline-intro-text">
-            The talks, essays and interviews I&rsquo;ve been taking in lately —
+            The talks, essays, interviews and books I&rsquo;ve been taking in lately —
             a running log of what&rsquo;s shaping how I think.
           </p>
 
