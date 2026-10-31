@@ -22,13 +22,16 @@ Single scrolling landing page with:
 - Preview section: Work
 - Preview section: Side Projects
 
-### `/writing` — Writing & Notes
-A unified feed of all public writing across platforms. Each item is a card that links out to the original post — no content is hosted here. Sources:
-- Substack (long-form essays — the existing 5 essays will be migrated to Substack links)
-- Twitter/X
-- LinkedIn
+### `/writing` — Writing
+A timeline (same layout as `/library`) of essays from The Ansible (ahumpert.substack.com). Posts are read natively at `/writing/[slug]`.
 
-Cards show: title/excerpt, platform badge, date, external link.
+**Data:** `npm run sync` pulls the Substack RSS feed into `src/data/writing.json` (metadata) and `src/data/posts/<slug>.html` (cleaned body — Substack's subscribe widgets and image buttons are stripped). It also runs before every build (`--soft`, so a failed fetch keeps the saved posts). Posts are merged by slug and never deleted, since the feed only holds the latest ~20.
+
+**Interaction:** share buttons share this site's URL. Like / Comment / Restack hand off to the post on Substack (they need a Substack login, and Substack has no API for them). Subscribe uses Substack's embed iframe.
+
+**SEO:** Substack is the canonical copy — post pages set `<link rel="canonical">` to the Substack URL. `scripts/prerender-writing.mjs` runs after `vite build` and writes `dist/writing/<slug>/index.html` with each post's title/description/image so link previews work without JavaScript.
+
+X and LinkedIn posts may be added to this page later.
 
 ### `/work` — Work Portfolio
 Case studies of professional projects, made platform/company-agnostic. Each project gets its own page (`/work/[slug]`). Format: consultant-style write-up + product screenshots/demos.
@@ -52,7 +55,7 @@ A timeline (grouped by month, newest first, infinite scroll) of YouTube videos, 
 ## Content Policy
 
 All content is placeholder text during initial build. Real content will be added per section:
-- Writing: Substack/Twitter/LinkedIn links (no content stored in repo)
+- Writing: synced from Substack (see `/writing` above)
 - Work: Anonymized case studies with placeholder copy and screenshots
 - Side Projects: Placeholder copy and links
 

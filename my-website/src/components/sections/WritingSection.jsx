@@ -1,4 +1,8 @@
+import { Link } from 'react-router-dom';
 import Orb from '../Orb';
+import { POSTS, postDate } from '../../writing';
+
+const LATEST = POSTS.slice(0, 3);
 
 export default function WritingSection() {
   return (
@@ -24,7 +28,30 @@ export default function WritingSection() {
       <div className="container" style={{ position: 'relative', zIndex: 'var(--z-content)' }}>
         <h2 className="section-heading">Writing</h2>
 
-        <p className="coming-soon-line">Coming soon</p>
+        {LATEST.length ? (
+          <>
+            <div style={{ maxWidth: '760px' }}>
+              {LATEST.map((post) => (
+                <Link key={post.slug} to={`/writing/${post.slug}`} className="writing-item">
+                  <span className="writing-item-title">{post.title}</span>
+                  <span className="writing-item-meta">
+                    <span className="badge">{post.minutes} min</span>
+                    <time dateTime={post.date}>
+                      {postDate(post.date, { month: 'short', year: 'numeric' })}
+                    </time>
+                  </span>
+                </Link>
+              ))}
+            </div>
+
+            <Link to="/writing" className="view-all">
+              All writing
+              <span className="arrow-icon" aria-hidden="true">→</span>
+            </Link>
+          </>
+        ) : (
+          <p className="coming-soon-line">Coming soon</p>
+        )}
       </div>
     </section>
   );

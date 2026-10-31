@@ -201,3 +201,14 @@ main > .section:nth-of-type(5) .orb {
   color: var(--parchment);
   outline: 1.5px solid var(--parchment);
 }
+
+[data-theme='iskandar'] .post-subscribe {
+  border-radius: 6px;
+}
+[data-theme='iskandar'] .post-body img,
+[data-theme='iskandar'] .post-subscribe-frame {
+  border-radius: 0;
+}
+[data-theme='iskandar'] .post-action:hover {
+  border-color: var(--parchment-muted);
+}

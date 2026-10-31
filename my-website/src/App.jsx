@@ -4,6 +4,8 @@ import HomePage from './components/HomePage';
 import WorkPage from './components/WorkPage';
 import CommunityPage from './components/CommunityPage';
 import LibraryPage from './components/LibraryPage';
+import WritingPage from './components/WritingPage';
+import PostPage from './components/PostPage';
 
 // Placeholder pages — to be built out
 function ComingSoon({ title }) {
@@ -27,7 +29,8 @@ function App() {
       <Nav />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/writing" element={<ComingSoon title="Writing" />} />
+        <Route path="/writing" element={<WritingPage />} />
+        <Route path="/writing/:slug" element={<PostPage />} />
         <Route path="/work" element={<WorkPage />} />
         <Route path="/work/:slug" element={<ComingSoon title="Case Study" />} />
         <Route path="/projects" element={<ComingSoon title="Projects" />} />
