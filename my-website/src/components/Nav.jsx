@@ -39,7 +39,7 @@ export default function Nav() {
     <nav className={`site-nav${scrolled ? ' scrolled' : ''}`} aria-label="Site navigation">
       <Link to="/" className="nav-name">
         <LensMark />
-        Alexander Humpert
+        Alexander Wolfgang Humpert
       </Link>
       <ul className="nav-links">
         <li><Link to="/writing">Writing</Link></li>

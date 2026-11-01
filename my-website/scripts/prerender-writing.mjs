@@ -13,7 +13,7 @@ const escape = (text = '') =>
   text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 for (const post of posts) {
-  const title = `${post.title} — Alexander Humpert`;
+  const title = `${post.title} — Alexander Wolfgang Humpert`;
   const tags = [
     `<meta name="description" content="${escape(post.subtitle)}" />`,
     `<link rel="canonical" href="${escape(post.url)}" />`,

@@ -75,7 +75,7 @@ export default function WritingPage() {
   const hasMore = visibleCount < POSTS.length;
 
   useEffect(() => {
-    document.title = 'Writing — Alexander Humpert';
+    document.title = 'Writing — Alexander Wolfgang Humpert';
   }, []);
 
   // Infinite scroll: reveal the next batch as the sentinel nears the viewport.

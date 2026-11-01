@@ -10,7 +10,7 @@ const SUBSTACK = 'https://ahumpert.substack.com';
 function useHeadTags(post) {
   useEffect(() => {
     if (!post) return undefined;
-    document.title = `${post.title} — Alexander Humpert`;
+    document.title = `${post.title} — Alexander Wolfgang Humpert`;
 
     const canonical = document.createElement('link');
     canonical.rel = 'canonical';
@@ -23,7 +23,7 @@ function useHeadTags(post) {
     return () => {
       canonical.remove();
       description.remove();
-      document.title = 'Alexander Humpert';
+      document.title = 'Alexander Wolfgang Humpert';
     };
   }, [post]);
 }
