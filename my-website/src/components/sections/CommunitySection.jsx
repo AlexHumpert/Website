@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom';
-import Orb from '../Orb';
+import HomeSection from './HomeSection';
 
 const EVENTS = [
   {
@@ -38,53 +37,35 @@ function ArrowUpRight() {
 
 export default function CommunitySection() {
   return (
-    <section
+    <HomeSection
       id="community"
-      className="section"
-      style={{ minHeight: '80vh', paddingTop: 'var(--space-32)', paddingBottom: 'var(--space-32)' }}
-      aria-label="Community"
+      title="Community"
+      link={{ to: '/community', label: 'View all community work' }}
+      orb={{
+        innerColor: 'oklch(0.480 0.155 270)',
+        outerColor: 'oklch(0.620 0.130 310)',
+        animationIndex: 0,
+        duration: 14,
+        style: { width: '600px', height: '600px', top: '-100px', right: '-180px' },
+      }}
     >
-      <Orb
-        innerColor="oklch(0.480 0.155 270)"
-        outerColor="oklch(0.620 0.130 310)"
-        animationIndex={0}
-        duration={14}
-        style={{
-          width: '600px',
-          height: '600px',
-          top: '-100px',
-          right: '-180px',
-        }}
-      />
-
-      <div className="container" style={{ position: 'relative', zIndex: 'var(--z-content)' }}>
-        <h2 className="section-heading">Community</h2>
-
-        <div style={{ maxWidth: '760px' }}>
-          {EVENTS.map((item) => (
-            <a
-              key={item.title}
-              href={item.href}
-              className="writing-item"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`${item.title} — ${item.type}`}
-            >
-              <span className="writing-item-title">{item.title}</span>
-              <span className="writing-item-meta">
-                <span className="badge">{item.type}</span>
-                <span>{item.date}</span>
-                <ArrowUpRight />
-              </span>
-            </a>
-          ))}
-        </div>
-
-        <Link to="/community" className="view-all">
-          View all community work
-          <span className="arrow-icon" aria-hidden="true">→</span>
-        </Link>
-      </div>
-    </section>
+      {EVENTS.map((item) => (
+        <a
+          key={item.title}
+          href={item.href}
+          className="writing-item"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${item.title} (${item.type}, opens LinkedIn)`}
+        >
+          <span className="writing-item-title">{item.title}</span>
+          <span className="writing-item-meta">
+            <span className="badge">{item.type}</span>
+            <span>{item.date}</span>
+            <ArrowUpRight />
+          </span>
+        </a>
+      ))}
+    </HomeSection>
   );
 }
