@@ -122,6 +122,10 @@ main > .section:nth-of-type(5) .orb {
 .case-pill.active {
   color: var(--night);
 }
+/* Library pills use --ink as their accent, so the label flips to the page colour */
+.library-filters .case-pill.active {
+  color: var(--bg);
+}
 
 /* ══ Dark mode — the night palette ════════════════════════════════════════ */
 
