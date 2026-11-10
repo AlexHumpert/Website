@@ -1,6 +1,70 @@
 // Side projects shown on /projects, newest first. Thumbnails live in public/projects/.
 // `stack` and `learned` render as the two short lines under each story.
+// `versions` (oldest first) shows as a changelog beside the entry on hover.
 export const PROJECTS = [
+  {
+    slug: 'insitu',
+    title: 'In Situ',
+    date: '2026-11-09',
+    tag: 'In progress',
+    url: 'https://insitu-397812137944.europe-north1.run.app',
+    image: '/projects/insitu.jpg',
+    access: 'Invite only for now, so ask me for a passcode.',
+    story:
+      'My girlfriend and I are learning Danish together, mostly at the dinner table, where it goes well until one of us stalls on “how do you say… cutting board?” So I built the friend we kept wishing was sitting with us: an app that lies on the table, listens, and when you say “how do you say” (or “hvordan siger man”), shows the Danish word and reads it aloud. Then I wanted to practise while cooking alone, so it grew a Talk mode: pick a topic and a level and chat with a patient Danish partner. Yes, I know the trope: tech guy meets a little social friction, builds an app to remove it. In my defence, the friction is not knowing the word for skærebræt, and the bot is very cute about it. It hops while it listens and falls asleep when you stop.',
+    stack: 'Node, Deepgram listening in Danish and English at once, Claude Haiku for the lookups, ElevenLabs for the voice, Cloud Run, and Claude Code for basically all of it.',
+    learned: 'the best moment to learn a word is the second you needed it.',
+    versions: [
+      {
+        date: '2026-10-20',
+        hash: 'b3d05b9',
+        title: 'Live mode',
+        note: 'Listens to the conversation. Say “how do you say…?” and the Danish word appears, large, and is read aloud.',
+      },
+      {
+        date: '2026-10-20',
+        hash: '272a4a6',
+        title: 'A proper coat of paint',
+        note: 'Drifting gradient, frosted glass, and two themes: Dawn for light, Nordlys for dark.',
+      },
+      {
+        date: '2026-10-26',
+        hash: 'a613c5a',
+        title: 'Faster answers',
+        note: 'Streams the word and starts speaking it before Claude has finished the rest of the card.',
+      },
+      {
+        date: '2026-10-27',
+        hash: 'a7b4b2e',
+        title: 'Ready for testers',
+        note: 'Passcodes, a daily spend cap, 20-minute sessions, and an admin page showing what everything costs.',
+      },
+      {
+        date: '2026-10-28',
+        hash: 'b59cd4b',
+        title: 'Meet the bot',
+        note: 'The listening orb becomes a little bot that hops while it listens and sleeps when idle.',
+      },
+      {
+        date: '2026-11-07',
+        hash: '4e8cd86',
+        title: 'Both directions',
+        note: 'Ask what a Danish word means, too: “hvad betyder…?” gets an English answer.',
+      },
+      {
+        date: '2026-11-08',
+        hash: '4173d54',
+        title: 'Talk mode',
+        note: 'A Danish conversation partner for practising alone. Pick a topic and level, and it answers when you pause.',
+      },
+      {
+        date: '2026-11-09',
+        hash: '909f4e7',
+        title: 'Moved to Cloud Run',
+        note: 'Deploys itself to Google Cloud on every push to main.',
+      },
+    ],
+  },
   {
     slug: 'inbox-genie',
     title: 'Inbox Genie',

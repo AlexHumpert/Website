@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { PanelRightClose, PanelRightOpen } from 'lucide-react';
 import { PROJECTS } from '../data/projects';
 
 // Same month tints as the Library and Writing timelines.
@@ -10,6 +11,10 @@ const MONTH_TONES = [
   { accent: 'oklch(0.500 0.120 215)', bg: 'oklch(0.960 0.020 215)' },
   { accent: 'oklch(0.480 0.155 300)', bg: 'oklch(0.958 0.018 300)' },
 ];
+
+const PANEL_WIDTH = 300;
+// Below this the changelog opens inline under the entry instead of beside it.
+const WIDE = '(min-width: 1100px)';
 
 const ITEMS = [...PROJECTS].sort((a, b) => b.date.localeCompare(a.date));
 
@@ -30,12 +35,107 @@ function groupByMonth(items) {
   return months;
 }
 
-function ProjectEntry({ project }) {
+const dayLabel = (date) =>
+  new Date(`${date}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+
+// Git-log style list of what changed, oldest first.
+function VersionLog({ versions }) {
   return (
-    <article className="library-entry project-entry" id={project.slug}>
+    <ol className="version-log">
+      {versions.map((version) => (
+        <li key={version.hash} className="version">
+          <p className="version-meta">
+            <code>{version.hash}</code>
+            <time dateTime={version.date}>{dayLabel(version.date)}</time>
+          </p>
+          <p className="version-title">{version.title}</p>
+          <p className="version-note">{version.note}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+function ProjectEntry({ project }) {
+  const [open, setOpen] = useState(false);
+  const [panelBox, setPanelBox] = useState(null);
+  const articleRef = useRef(null);
+  const toggleRef = useRef(null);
+  const panelId = useId();
+  const versions = project.versions ?? [];
+  const hasVersions = versions.length > 0;
+
+  // Level with the screenshot, beside the entry when there's room; otherwise it
+  // overlaps the screenshot's right edge rather than the text.
+  const place = () => {
+    if (!window.matchMedia(WIDE).matches) return setPanelBox(null);
+    const rect = articleRef.current.getBoundingClientRect();
+    const shot = articleRef.current.querySelector('.project-shot');
+    setPanelBox({
+      left: Math.min(rect.width + 32, window.innerWidth - rect.left - PANEL_WIDTH - 24),
+      top: shot.offsetTop,
+      width: PANEL_WIDTH,
+      maxHeight: shot.offsetHeight,
+    });
+  };
+
+  const close = () => {
+    setOpen(false);
+    toggleRef.current?.focus();
+  };
+
+  useEffect(() => {
+    if (!open) return;
+    window.addEventListener('resize', place);
+    return () => window.removeEventListener('resize', place);
+  }, [open]);
+
+  return (
+    <article
+      ref={articleRef}
+      className="library-entry project-entry"
+      id={project.slug}
+      onKeyDown={(event) => {
+        if (event.key === 'Escape' && open) close();
+      }}
+    >
       <p className="library-entry-meta">
         <span className="badge">{project.tag}</span>
+        {hasVersions && (
+          <button
+            ref={toggleRef}
+            type="button"
+            className="version-toggle"
+            aria-expanded={open}
+            aria-controls={panelId}
+            onClick={() => {
+              place();
+              setOpen(!open);
+            }}
+          >
+            {open ? <PanelRightClose size={16} aria-hidden="true" /> : <PanelRightOpen size={16} aria-hidden="true" />}
+            How it got here
+            <span className="version-count">{versions.length}</span>
+          </button>
+        )}
       </p>
+
+      {hasVersions && (
+        <aside
+          id={panelId}
+          className={`version-panel${open ? ' open' : ''}`}
+          style={panelBox ?? undefined}
+          aria-label={`${project.title} changelog`}
+        >
+          <div className="version-panel-head">
+            <p>How it got here</p>
+            <button type="button" className="version-close" onClick={close} aria-label="Close changelog">
+              <PanelRightClose size={16} aria-hidden="true" />
+            </button>
+          </div>
+          <VersionLog versions={versions} />
+        </aside>
+      )}
 
       <a
         href={project.url}
@@ -80,6 +180,7 @@ function ProjectEntry({ project }) {
           </Link>
         )}
       </div>
+      {project.access && <p className="project-access">{project.access}</p>}
     </article>
   );
 }
