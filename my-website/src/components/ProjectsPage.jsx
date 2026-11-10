@@ -12,10 +12,6 @@ const MONTH_TONES = [
   { accent: 'oklch(0.480 0.155 300)', bg: 'oklch(0.958 0.018 300)' },
 ];
 
-const PANEL_WIDTH = 300;
-// Below this the changelog opens inline under the entry instead of beside it.
-const WIDE = '(min-width: 1100px)';
-
 const ITEMS = [...PROJECTS].sort((a, b) => b.date.localeCompare(a.date));
 
 const monthLabel = (date) =>
@@ -58,45 +54,20 @@ function VersionLog({ versions }) {
 
 function ProjectEntry({ project }) {
   const [open, setOpen] = useState(false);
-  const [panelBox, setPanelBox] = useState(null);
-  const articleRef = useRef(null);
   const toggleRef = useRef(null);
   const panelId = useId();
   const versions = project.versions ?? [];
   const hasVersions = versions.length > 0;
 
-  // Level with the screenshot, beside the entry when there's room; otherwise it
-  // overlaps the screenshot's right edge rather than the text.
-  const place = () => {
-    if (!window.matchMedia(WIDE).matches) return setPanelBox(null);
-    const rect = articleRef.current.getBoundingClientRect();
-    const shot = articleRef.current.querySelector('.project-shot');
-    setPanelBox({
-      left: Math.min(rect.width + 32, window.innerWidth - rect.left - PANEL_WIDTH - 24),
-      top: shot.offsetTop,
-      width: PANEL_WIDTH,
-      maxHeight: shot.offsetHeight,
-    });
-  };
-
-  const close = () => {
-    setOpen(false);
-    toggleRef.current?.focus();
-  };
-
-  useEffect(() => {
-    if (!open) return;
-    window.addEventListener('resize', place);
-    return () => window.removeEventListener('resize', place);
-  }, [open]);
-
   return (
     <article
-      ref={articleRef}
       className="library-entry project-entry"
       id={project.slug}
       onKeyDown={(event) => {
-        if (event.key === 'Escape' && open) close();
+        if (event.key === 'Escape' && open) {
+          setOpen(false);
+          toggleRef.current?.focus();
+        }
       }}
     >
       <p className="library-entry-meta">
@@ -108,47 +79,40 @@ function ProjectEntry({ project }) {
             className="version-toggle"
             aria-expanded={open}
             aria-controls={panelId}
-            onClick={() => {
-              place();
-              setOpen(!open);
-            }}
+            aria-label={`${open ? 'Hide' : 'Show'} changelog, ${versions.length} updates`}
+            onClick={() => setOpen(!open)}
           >
-            {open ? <PanelRightClose size={16} aria-hidden="true" /> : <PanelRightOpen size={16} aria-hidden="true" />}
-            How it got here
+            {open ? <PanelRightClose size={15} aria-hidden="true" /> : <PanelRightOpen size={15} aria-hidden="true" />}
             <span className="version-count">{versions.length}</span>
           </button>
         )}
       </p>
 
-      {hasVersions && (
-        <aside
-          id={panelId}
-          className={`version-panel${open ? ' open' : ''}`}
-          style={panelBox ?? undefined}
-          aria-label={`${project.title} changelog`}
+      {/* The screenshot and the changelog share one frame: opening the log slides it
+          in from the right and the screenshot gives up the space. */}
+      <div className={`project-media${open ? ' open' : ''}`}>
+        <a
+          href={project.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="project-shot"
+          aria-label={`Open ${project.title} in a new tab`}
         >
-          <div className="version-panel-head">
-            <p>How it got here</p>
-            <button type="button" className="version-close" onClick={close} aria-label="Close changelog">
-              <PanelRightClose size={16} aria-hidden="true" />
-            </button>
-          </div>
-          <VersionLog versions={versions} />
-        </aside>
-      )}
+          <img src={project.image} alt="" loading="lazy" />
+          <span className="project-shot-cta" aria-hidden="true">
+            Open the app <span className="arrow-icon">↗</span>
+          </span>
+        </a>
 
-      <a
-        href={project.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="project-shot"
-        aria-label={`Open ${project.title} in a new tab`}
-      >
-        <img src={project.image} alt="" loading="lazy" />
-        <span className="project-shot-cta" aria-hidden="true">
-          Open the app <span className="arrow-icon">↗</span>
-        </span>
-      </a>
+        {hasVersions && (
+          <aside id={panelId} className="version-panel" aria-label={`${project.title} changelog`} inert={!open}>
+            <div className="version-panel-inner">
+              <p className="version-panel-head">How it got here</p>
+              <VersionLog versions={versions} />
+            </div>
+          </aside>
+        )}
+      </div>
 
       <h3 className="library-entry-title">
         <a href={project.url} target="_blank" rel="noopener noreferrer">
