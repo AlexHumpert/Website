@@ -4,7 +4,7 @@
 export const PROJECTS = [
   {
     slug: 'insitu',
-    title: 'In Situ',
+    title: 'Insitu',
     date: '2026-11-09',
     tag: 'In progress',
     url: 'https://insitu-397812137944.europe-north1.run.app',
