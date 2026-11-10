@@ -1,5 +1,15 @@
 [
   {
+    "slug": "how-do-i-say-that",
+    "title": "How do I say that?",
+    "subtitle": "Fixing my Danish app from my phone, in the eleven minutes between noticing a bug and using the fix.",
+    "date": "2026-11-10",
+    "image": "/projects/insitu/how-do-i-say-button.jpg",
+    "author": "Alexander Wolfgang Humpert",
+    "minutes": 2,
+    "note": true
+  },
+  {
     "slug": "designing-for-dignity-in-the-age",
     "title": "Designing for Dignity in the Age of Agentic AI",
     "subtitle": "How Enlightenment thinkers, early computing pioneers, and modern marketers converge in the design of human-AI systems",

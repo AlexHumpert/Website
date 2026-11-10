@@ -1262,6 +1262,12 @@ body {
   margin: 0 auto;
   border-radius: 8px;
 }
+/* Phone screenshots in notes: tall, so keep them phone-sized. */
+.post-body .phone-shot img {
+  width: 300px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
 .post-body figcaption {
   margin-top: var(--space-3);
   font-size: var(--text-sm);

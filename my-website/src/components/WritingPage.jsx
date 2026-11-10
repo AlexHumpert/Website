@@ -31,7 +31,7 @@ function WritingEntry({ post }) {
   return (
     <article className="library-entry writing-entry">
       <p className="library-entry-meta">
-        <span className="badge">Essay</span>
+        <span className="badge">{post.note ? 'Note' : 'Essay'}</span>
         <time dateTime={post.date}>{postDate(post.date, { day: 'numeric', month: 'short' })}</time>
         <span aria-hidden="true">·</span>
         <span>{post.minutes} min read</span>
@@ -122,8 +122,9 @@ export default function WritingPage() {
             Writing
           </h1>
           <p className="timeline-intro-text">
-            Essays from {POSTS[0]?.publication ?? 'my Substack'}, my Substack, on technology,
-            information and democracy. Read them here, or subscribe to get new ones by email.
+            Essays from {POSTS.find((post) => !post.note)?.publication ?? 'my Substack'}, my
+            Substack, on technology, information and democracy, plus the odd note on things
+            I&rsquo;m building. Read them here, or subscribe to get new essays by email.
           </p>
         </header>
 
@@ -141,7 +142,10 @@ export default function WritingPage() {
                 <div className="timeline-company-sticky">
                   <h2 className="timeline-company-name">{month.label}</h2>
                   <p className="timeline-company-meta">
-                    {month.posts.length} {month.posts.length === 1 ? 'essay' : 'essays'}
+                    {month.posts.length}{' '}
+                    {month.posts.every((post) => post.note)
+                      ? month.posts.length === 1 ? 'note' : 'notes'
+                      : month.posts.length === 1 ? 'essay' : 'essays'}
                   </p>
                 </div>
               </div>

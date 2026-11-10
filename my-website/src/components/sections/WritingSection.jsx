@@ -22,7 +22,7 @@ export default function WritingSection() {
         <>
           <Link to={`/writing/${FEATURED.slug}`} className="home-feature">
             <span className="home-feature-meta">
-              Latest essay · {postDate(FEATURED.date, { month: 'long', year: 'numeric' })} · {FEATURED.minutes} min read
+              {FEATURED.note ? 'Latest note' : 'Latest essay'} · {postDate(FEATURED.date, { month: 'long', year: 'numeric' })} · {FEATURED.minutes} min read
             </span>
             <span className="home-feature-title">{FEATURED.title}</span>
             {FEATURED.subtitle && <span className="home-feature-subtitle">{FEATURED.subtitle}</span>}

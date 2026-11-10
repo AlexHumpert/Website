@@ -4,9 +4,11 @@ import { ArrowLeft, Check, Heart, Link2, Mail, MessageCircle, Repeat2, Share } f
 import { POSTS, loadPostHtml, postDate } from '../writing';
 
 const SUBSTACK = 'https://ahumpert.substack.com';
+const PUBLICATION = POSTS.find((post) => !post.note)?.publication ?? 'The Ansible';
 
 // Points the page's <head> at this post while it's open: canonical link to
-// Substack (the original) and a description for search results.
+// Substack (the original) and a description for search results. Notes live
+// only on this site, so they have no Substack original.
 function useHeadTags(post) {
   useEffect(() => {
     if (!post) return undefined;
@@ -14,7 +16,7 @@ function useHeadTags(post) {
 
     const canonical = document.createElement('link');
     canonical.rel = 'canonical';
-    canonical.href = post.url;
+    canonical.href = post.url ?? `${window.location.origin}/writing/${post.slug}`;
     const description = document.createElement('meta');
     description.name = 'description';
     description.content = post.subtitle ?? '';
@@ -159,7 +161,7 @@ export default function PostPage() {
 
         <header className="post-header">
           <p className="timeline-kicker">
-            {post.publication} · <time dateTime={post.date}>{postDate(post.date)}</time> ·{' '}
+            {post.note ? 'Note' : post.publication} · <time dateTime={post.date}>{postDate(post.date)}</time> ·{' '}
             {post.minutes} min read
           </p>
           <h1 className="post-title">{post.title}</h1>
@@ -177,18 +179,18 @@ export default function PostPage() {
 
         <footer className="post-footer">
           <div className="post-actions">
-            <SubstackButtons post={post} />
+            {!post.note && <SubstackButtons post={post} />}
             <ShareButtons post={post} />
           </div>
 
           <section className="post-subscribe" aria-label="Subscribe">
             <h2 className="post-subscribe-title">Get new essays by email</h2>
             <p className="post-subscribe-text">
-              Free, through {post.publication} on Substack. No spam, unsubscribe any time.
+              Free, through {PUBLICATION} on Substack. No spam, unsubscribe any time.
             </p>
             <iframe
               src={`${SUBSTACK}/embed`}
-              title={`Subscribe to ${post.publication}`}
+              title={`Subscribe to ${PUBLICATION}`}
               className="post-subscribe-frame"
               loading="lazy"
             />

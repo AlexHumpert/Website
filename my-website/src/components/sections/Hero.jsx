@@ -13,7 +13,7 @@ const LIBRARY_VERB = { video: 'Last watched', article: 'Last read', book: 'Last 
 
 export default function Hero() {
   const now = [
-    LATEST_POST && { label: 'Latest essay', title: LATEST_POST.title, to: `/writing/${LATEST_POST.slug}` },
+    LATEST_POST && { label: LATEST_POST.note ? 'Latest note' : 'Latest essay', title: LATEST_POST.title, to: `/writing/${LATEST_POST.slug}` },
     { label: 'Currently', title: `Lead AI Solution Consultant, ${CURRENT_ROLE.title}`, to: '/work' },
     LATEST_LIBRARY && { label: LIBRARY_VERB[LATEST_LIBRARY.type] ?? 'In the library', title: LATEST_LIBRARY.title, to: '/library' },
   ].filter(Boolean);

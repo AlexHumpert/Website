@@ -6,6 +6,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
 const DIST = new URL('../dist/', import.meta.url);
+const SITE = 'https://alexander-wolfgang-humpert.io';
 const posts = JSON.parse(await readFile(new URL('../src/data/writing.json', import.meta.url), 'utf8'));
 const shell = await readFile(new URL('index.html', DIST), 'utf8');
 
@@ -16,11 +17,12 @@ for (const post of posts) {
   const title = `${post.title} — Alexander Wolfgang Humpert`;
   const tags = [
     `<meta name="description" content="${escape(post.subtitle)}" />`,
-    `<link rel="canonical" href="${escape(post.url)}" />`,
+    // Notes have no Substack original, so they point at themselves.
+    `<link rel="canonical" href="${escape(post.url ?? `${SITE}/writing/${post.slug}`)}" />`,
     `<meta property="og:type" content="article" />`,
     `<meta property="og:title" content="${escape(post.title)}" />`,
     `<meta property="og:description" content="${escape(post.subtitle)}" />`,
-    post.image && `<meta property="og:image" content="${escape(post.image)}" />`,
+    post.image && `<meta property="og:image" content="${escape(new URL(post.image, SITE).href)}" />`,
     `<meta property="article:published_time" content="${post.date}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
   ].filter(Boolean);
