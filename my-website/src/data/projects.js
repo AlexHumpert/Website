@@ -63,6 +63,22 @@ export const PROJECTS = [
         title: 'Moved to Cloud Run',
         note: 'Deploys itself to Google Cloud on every push to main.',
       },
+      {
+        date: '2026-11-10',
+        title: 'How do I say that?',
+        note: 'Ask it mid-chat and the partner waits for your word instead of answering. Plus a button for when the mic misses it.',
+        story: [
+          'Talk mode had one habit I couldn’t live with. Halfway through a sentence I’d reach for a word, ask “how do I say that?”, and my Danish partner would happily reply to it as if it were small talk. “Oh yes, yes, okay…” Lovely, but no help.',
+          'The cause was small. The app heard a request, decided “that” was too vague to look up, and handed the turn back to the conversation.',
+          'Now “how do I say that?” (or “hvordan siger jeg det?”) makes the partner stop and wait. Whatever I say next, in English, comes back as a word card. There’s also a How do I say…? button for when the mic misses the question. It cuts the partner off mid-sentence, keeps what I’d already said so the lookup has context, and waits for the word.',
+          'I found the bug while using the app, described it to Claude Code from my phone, and eleven minutes later the fix was live. That’s the part I keep thinking about. The people best placed to build software are the ones tripping over the problem, and it’s never been cheaper for them to just fix it.',
+        ],
+        images: [
+          { src: '/projects/insitu/asking-claude.jpg', alt: 'Describing the bug to Claude Code from my phone' },
+          { src: '/projects/insitu/how-do-i-say-button.jpg', alt: 'Talk mode with the new “How do I say…?” button' },
+          { src: '/projects/insitu/say-it-in-english.jpg', alt: 'The partner waiting: “Say it in English · tap to cancel”' },
+        ],
+      },
     ],
   },
   {

@@ -34,18 +34,36 @@ function groupByMonth(items) {
 const dayLabel = (date) =>
   new Date(`${date}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
 
-// Git-log style list of what changed, oldest first.
+// Git-log style list of what changed, oldest first. An update with a `story`
+// opens into a short write-up with its screenshots.
 function VersionLog({ versions }) {
   return (
     <ol className="version-log">
       {versions.map((version) => (
-        <li key={version.hash} className="version">
+        <li key={version.hash ?? version.title} className="version">
           <p className="version-meta">
-            <code>{version.hash}</code>
+            {version.hash && <code>{version.hash}</code>}
             <time dateTime={version.date}>{dayLabel(version.date)}</time>
           </p>
           <p className="version-title">{version.title}</p>
           <p className="version-note">{version.note}</p>
+          {version.story && (
+            <details className="version-story">
+              <summary>Read the story</summary>
+              {version.story.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+              {version.images && (
+                <div className="version-shots">
+                  {version.images.map((image) => (
+                    <a key={image.src} href={image.src} target="_blank" rel="noopener noreferrer">
+                      <img src={image.src} alt={image.alt} loading="lazy" />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </details>
+          )}
         </li>
       ))}
     </ol>
