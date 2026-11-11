@@ -30,10 +30,10 @@ export default function Hero() {
 
       <div className="container hero-inner">
         <div className="hero-copy">
-          <p className="hero-kicker">Writer, builder, operator</p>
-          <h1 className="hero-title">Thinking in public, building in the open.</h1>
+          <p className="hero-kicker">Curious, mostly</p>
+          <h1 className="hero-title">Come see what I&rsquo;m up to.</h1>
           <p className="hero-lede">
-            I write about technology, politics, and the systems that shape how we live. I build products and tools. This is where the work lives.
+            This is my little corner of the internet: ideas I couldn&rsquo;t stop chasing, things I&rsquo;m building, and whatever I&rsquo;ve been reading or watching lately. Pull up a chair.
           </p>
         </div>
 
