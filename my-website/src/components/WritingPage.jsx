@@ -128,36 +128,39 @@ export default function WritingPage() {
           </p>
         </header>
 
-        {months.map((month) => (
-          <section
-            key={month.key}
-            data-month={month.key}
-            ref={(el) => (monthRefs.current[month.key] = el)}
-            className="timeline-era library-month"
-            style={{ '--era-accent': month.tone.accent }}
-            aria-label={month.label}
-          >
-            <div className="timeline-era-grid">
-              <div>
-                <div className="timeline-company-sticky">
-                  <h2 className="timeline-company-name">{month.label}</h2>
-                  <p className="timeline-company-meta">
-                    {month.posts.length}{' '}
-                    {month.posts.every((post) => post.note)
-                      ? month.posts.length === 1 ? 'note' : 'notes'
-                      : month.posts.length === 1 ? 'essay' : 'essays'}
-                  </p>
+        {/* One continuous line runs through every month, top to bottom. */}
+        <div className="timeline-continuous">
+          {months.map((month) => (
+            <section
+              key={month.key}
+              data-month={month.key}
+              ref={(el) => (monthRefs.current[month.key] = el)}
+              className="timeline-era library-month"
+              style={{ '--era-accent': month.tone.accent }}
+              aria-label={month.label}
+            >
+              <div className="timeline-era-grid">
+                <div>
+                  <div className="timeline-company-sticky">
+                    <h2 className="timeline-company-name">{month.label}</h2>
+                    <p className="timeline-company-meta">
+                      {month.posts.length}{' '}
+                      {month.posts.every((post) => post.note)
+                        ? month.posts.length === 1 ? 'note' : 'notes'
+                        : month.posts.length === 1 ? 'essay' : 'essays'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="timeline-roles">
+                  {month.posts.map((post) => (
+                    <WritingEntry key={post.slug} post={post} />
+                  ))}
                 </div>
               </div>
-
-              <div className="timeline-roles">
-                {month.posts.map((post) => (
-                  <WritingEntry key={post.slug} post={post} />
-                ))}
-              </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          ))}
+        </div>
 
         {hasMore && <div ref={sentinelRef} className="library-sentinel" aria-hidden="true" />}
 

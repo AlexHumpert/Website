@@ -1,6 +1,6 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PanelRightClose, PanelRightOpen } from 'lucide-react';
+import { Layers, Lightbulb, PanelRightClose, PanelRightOpen } from 'lucide-react';
 import { PROJECTS } from '../data/projects';
 
 // Same month tints as the Library and Writing timelines.
@@ -141,11 +141,17 @@ function ProjectEntry({ project }) {
 
       <dl className="project-facts">
         <div>
-          <dt>Stack</dt>
+          <dt>
+            <Layers className="project-fact-icon" size={14} aria-hidden="true" />
+            Stack
+          </dt>
           <dd>{project.stack}</dd>
         </div>
         <div>
-          <dt>What I learned</dt>
+          <dt>
+            <Lightbulb className="project-fact-icon" size={14} aria-hidden="true" />
+            What I learned
+          </dt>
           <dd>{project.learned}</dd>
         </div>
       </dl>
@@ -224,33 +230,36 @@ export default function ProjectsPage() {
           </p>
         </header>
 
-        {months.map((month) => (
-          <section
-            key={month.key}
-            data-month={month.key}
-            ref={(el) => (monthRefs.current[month.key] = el)}
-            className="timeline-era library-month"
-            style={{ '--era-accent': month.tone.accent }}
-            aria-label={month.label}
-          >
-            <div className="timeline-era-grid">
-              <div>
-                <div className="timeline-company-sticky">
-                  <h2 className="timeline-company-name">{month.label}</h2>
-                  <p className="timeline-company-meta">
-                    {month.items.length} {month.items.length === 1 ? 'project' : 'projects'}
-                  </p>
+        {/* One continuous line runs through every month, top to bottom. */}
+        <div className="timeline-continuous">
+          {months.map((month) => (
+            <section
+              key={month.key}
+              data-month={month.key}
+              ref={(el) => (monthRefs.current[month.key] = el)}
+              className="timeline-era library-month"
+              style={{ '--era-accent': month.tone.accent }}
+              aria-label={month.label}
+            >
+              <div className="timeline-era-grid">
+                <div>
+                  <div className="timeline-company-sticky">
+                    <h2 className="timeline-company-name">{month.label}</h2>
+                    <p className="timeline-company-meta">
+                      {month.items.length} {month.items.length === 1 ? 'project' : 'projects'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="timeline-roles">
+                  {month.items.map((project) => (
+                    <ProjectEntry key={project.slug} project={project} />
+                  ))}
                 </div>
               </div>
-
-              <div className="timeline-roles">
-                {month.items.map((project) => (
-                  <ProjectEntry key={project.slug} project={project} />
-                ))}
-              </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          ))}
+        </div>
 
         <footer className="timeline-end">
           <span className="timeline-end-dot" aria-hidden="true" />

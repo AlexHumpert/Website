@@ -238,33 +238,36 @@ export default function LibraryPage() {
           </div>
         </header>
 
-        {months.map((month) => (
-          <section
-            key={month.key}
-            data-month={month.key}
-            ref={(el) => (monthRefs.current[month.key] = el)}
-            className="timeline-era library-month"
-            style={{ '--era-accent': month.tone.accent }}
-            aria-label={month.label}
-          >
-            <div className="timeline-era-grid">
-              <div>
-                <div className="timeline-company-sticky">
-                  <h2 className="timeline-company-name">{month.label}</h2>
-                  <p className="timeline-company-meta">
-                    {month.items.length} {month.items.length === 1 ? 'entry' : 'entries'}
-                  </p>
+        {/* One continuous line runs through every month, top to bottom. */}
+        <div className="timeline-continuous">
+          {months.map((month) => (
+            <section
+              key={month.key}
+              data-month={month.key}
+              ref={(el) => (monthRefs.current[month.key] = el)}
+              className="timeline-era library-month"
+              style={{ '--era-accent': month.tone.accent }}
+              aria-label={month.label}
+            >
+              <div className="timeline-era-grid">
+                <div>
+                  <div className="timeline-company-sticky">
+                    <h2 className="timeline-company-name">{month.label}</h2>
+                    <p className="timeline-company-meta">
+                      {month.items.length} {month.items.length === 1 ? 'entry' : 'entries'}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="timeline-roles">
+                  {month.items.map((item) => (
+                    <LibraryEntry key={item.url} item={item} />
+                  ))}
                 </div>
               </div>
-
-              <div className="timeline-roles">
-                {month.items.map((item) => (
-                  <LibraryEntry key={item.url} item={item} />
-                ))}
-              </div>
-            </div>
-          </section>
-        ))}
+            </section>
+          ))}
+        </div>
 
         {hasMore && <div ref={sentinelRef} className="library-sentinel" aria-hidden="true" />}
 
