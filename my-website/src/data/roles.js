@@ -1,14 +1,9 @@
 // Shared by the homepage Work section and the hero's "Currently" line.
 export const ROLES = [
   {
-    title: 'VML MAP',
-    description: 'Junior Cloud Engineer → AI Solution Consultant → Lead AI Solution Consultant, now running internal AI enablement',
-    year: '2024 — Now',
-  },
-  {
-    title: 'Wunderman Thompson MAP',
-    description: 'Junior Data Strategist, then Junior Cloud Engineer on the Cloud & AI team',
-    year: '2022 — 24',
+    title: 'WPP Enterprise Solutions MAP',
+    description: 'Junior Data Strategist → Junior Cloud Engineer → AI Solution Consultant → Lead AI Solution Consultant, now running internal AI enablement',
+    year: '2022 — Now',
   },
   {
     title: 'The International Legal Foundation',

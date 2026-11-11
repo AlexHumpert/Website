@@ -3,11 +3,11 @@ import { useEffect, useRef, useState } from 'react';
 const ERAS = [
   {
     id: 'vmlmap',
-    company: 'VML MAP',
+    company: 'WPP Enterprise Solutions MAP',
     location: 'Copenhagen, Denmark',
-    dates: 'Jan 2024 — Present',
+    dates: 'Oct 2022 — Present',
     about:
-      'Born from the merger of VMLY&R and Wunderman Thompson — same MAP team, unified under VML, working across customer experience, brand experience and commerce.',
+      'WPP’s global Centre of Excellence for CRM, marketing automation and personalization at scale — helping brands humanize the relationship with their customers. Formerly Wunderman Thompson MAP, then VML MAP.',
     bg: 'oklch(0.960 0.022 30)',
     accent: 'oklch(0.560 0.170 30)',
     roles: [
@@ -18,7 +18,7 @@ const ERAS = [
           'Part of the Agentic Lab — the team building bespoke agentic AI for Fortune 500 clients — operating across the full deployment lifecycle, from executive discovery and presales through prototype, pilot and production. Alongside client work, running internal AI enablement across the organization.',
         bullets: [
           'Leading AI enablement for internal Claude across 150 pilot FTEs, deploying enterprise AI tooling with training programs for specialist consulting teams',
-          'Built VML MAP’s agentic AI delivery methodology — playbooks, hackathons and training across a 400+ person marketing operations organization',
+          'Built MAP’s agentic AI delivery methodology — playbooks, hackathons and training across a 400+ person marketing operations organization',
           'Developing and defending financial models, value trees and ROI business cases to secure investment approval for AI initiatives',
         ],
         projects: [
@@ -77,11 +77,11 @@ const ERAS = [
           {
             id: 'enablement',
             pill: 'AI enablement · Internal',
-            tag: 'VML MAP · Internal',
+            tag: 'MAP · Internal',
             status: 'Ongoing',
             title: 'AI enablement from within',
             description:
-              'Built VML MAP’s agentic AI delivery methodology — authoring playbooks and delivering hackathons and training programs across a 400+ person marketing operations organization. Now leading Claude enablement across 150 pilot FTEs and designing training for specialist teams in business architecture, experience strategy and design, value engineering and business development.',
+              'Built MAP’s agentic AI delivery methodology — authoring playbooks and delivering hackathons and training programs across a 400+ person marketing operations organization. Now leading Claude enablement across 150 pilot FTEs and designing training for specialist teams in business architecture, experience strategy and design, value engineering and business development.',
             stats: [
               { value: '400+', label: 'people reached through training' },
               { value: '150', label: 'pilot FTEs on Claude' },
@@ -103,37 +103,15 @@ const ERAS = [
       },
       {
         title: 'Junior Cloud Engineer — Cloud & AI',
-        meta: 'Jan 2024 — Sep 2024 · 9 mos',
+        meta: 'Sep 2023 — Sep 2024 · 1 yr 1 mo',
         summary:
-          'Spearheaded the integration of GenAI solutions within a Marketing Operations department of 400+ professionals, serving as the primary liaison between technical teams and business stakeholders.',
-        bullets: [
-          'Led discovery sessions with Marketing Operations stakeholders to identify automation opportunities',
-          'Analyzed and mapped complex workflows to pinpoint AI integration potential',
-          'Facilitated prioritization workshops with Global Directors to score and select high-impact automation solutions',
-          'Collaborated with cloud engineers to develop and deploy AI-driven task automations',
-        ],
-      },
-    ],
-  },
-  {
-    id: 'wtmap',
-    company: 'Wunderman Thompson MAP',
-    location: 'Copenhagen, Denmark',
-    dates: 'Oct 2022 — Jan 2024',
-    about:
-      'A Global Center of Excellence for CRM, loyalty, marketing automation and personalization within Wunderman Thompson and WPP.',
-    bg: 'oklch(0.960 0.020 215)',
-    accent: 'oklch(0.500 0.120 215)',
-    roles: [
-      {
-        title: 'Junior Cloud Engineer — Cloud & AI',
-        meta: 'Sep 2023 — Jan 2024 · 5 mos',
-        summary:
-          'Joined the Cloud & AI team, enabling brands to leverage emerging technologies for advanced marketing insight and activation.',
+          'Joined the Cloud & AI team to help brands put emerging technology to work for marketing insight and activation, then spearheaded the integration of GenAI across a 400+ person Marketing Operations department as the link between technical teams and business stakeholders.',
         bullets: [
           'Built a proof-of-concept YouTube Brand Lift Study predictor on GCP — dbt and BigQuery modeling, Python predictive models, Looker Studio dashboards',
           'Assisted in building data pipelines and deploying machine learning models',
-          'Presented progress to key stakeholders throughout the project lifecycle, translating complex technical concepts',
+          'Led discovery sessions with Marketing Operations stakeholders and mapped complex workflows to pinpoint AI automation opportunities',
+          'Facilitated prioritization workshops with Global Directors to score and select high-impact automation solutions',
+          'Collaborated with cloud engineers to develop and deploy AI-driven task automations',
         ],
       },
       {
