@@ -117,14 +117,16 @@ export default function WritingPage() {
 
       <div className="container">
         <header className="timeline-intro">
-          <p className="timeline-kicker">Essays &amp; notes</p>
+          <p className="timeline-kicker">Ideas, followed</p>
           <h1 className="section-heading" style={{ marginBottom: 'var(--space-6)' }}>
             Writing
           </h1>
           <p className="timeline-intro-text">
-            Essays from {POSTS.find((post) => !post.note)?.publication ?? 'my Substack'}, my
-            Substack, on technology, information and democracy, plus the odd note on things
-            I&rsquo;m building. Read them here, or subscribe to get new essays by email.
+            I get a lot of ideas. Some I chase down, and a few I pin to the page. This is
+            where they land: anything from how AI is reshaping democracy to the small, sweet
+            thrill of shipping code from my phone. Read along here, or subscribe to{' '}
+            {POSTS.find((post) => !post.note)?.publication ?? 'my Substack'} to get the next
+            one by email.
           </p>
         </header>
 
