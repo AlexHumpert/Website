@@ -1,4 +1,4 @@
-import HomeSection from './HomeSection';
+import HomeSection, { Row } from './HomeSection';
 
 const EVENTS = [
   {
@@ -27,44 +27,27 @@ const EVENTS = [
   },
 ];
 
-function ArrowUpRight() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true" style={{ flexShrink: 0 }}>
-      <path d="M2.5 11.5L11.5 2.5M11.5 2.5H5M11.5 2.5V9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  );
-}
-
 export default function CommunitySection() {
   return (
     <HomeSection
       id="community"
       title="Community"
       link={{ to: '/community', label: 'View all community work' }}
-      orb={{
-        innerColor: 'oklch(0.480 0.155 270)',
-        outerColor: 'oklch(0.620 0.130 310)',
-        animationIndex: 0,
-        duration: 14,
-        style: { width: '600px', height: '600px', top: '-100px', right: '-180px' },
-      }}
+      glow={{ from: 'var(--sky-blue)', to: 'var(--sky-violet)', className: 'glow-right glow-low' }}
     >
       {EVENTS.map((item) => (
-        <a
+        <Row
           key={item.title}
           href={item.href}
-          className="writing-item"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`${item.title} (${item.type}, opens LinkedIn)`}
-        >
-          <span className="writing-item-title">{item.title}</span>
-          <span className="writing-item-meta">
-            <span className="badge">{item.type}</span>
-            <span>{item.date}</span>
-            <ArrowUpRight />
-          </span>
-        </a>
+          title={item.title}
+          label={`${item.title} (${item.type}, opens LinkedIn)`}
+          meta={
+            <>
+              <span className="badge">{item.type}</span>
+              <span>{item.date}</span>
+            </>
+          }
+        />
       ))}
     </HomeSection>
   );

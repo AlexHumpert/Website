@@ -1,0 +1,203 @@
+/* ── Nav ────────────────────────────────────────────────────────────────── */
+.site-nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: var(--z-nav);
+  height: var(--nav-height);
+  transition: background-color var(--slow) ease, border-color var(--slow) ease;
+  border-bottom: 1px solid transparent;
+}
+/* Once the page moves under it, the bar frosts over so text never collides. */
+.site-nav.is-scrolled {
+  background: color-mix(in oklch, var(--bg) 72%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+  border-bottom-color: var(--line);
+}
+.site-nav.is-open {
+  background: var(--bg);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.site-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  height: 100%;
+  max-width: calc(var(--container-max) + 12rem);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+  color: var(--ink);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-lens { width: 34px; height: 20px; flex-shrink: 0; }
+.nav-brand-name {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  position: relative;
+  display: flex;
+  list-style: none;
+}
+.nav-link {
+  position: relative;
+  display: block;
+  padding: 0.45rem 0.85rem;
+  font-size: var(--text-sm);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color var(--fast) ease;
+}
+.nav-link:hover { color: var(--ink); }
+.nav-link[aria-current='page'] { color: var(--ink); }
+/* The page you are on carries a point of gold. */
+.nav-link[aria-current='page']::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -0.1rem;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold);
+}
+/* A soft pill that glides between links under the cursor. */
+.nav-glide {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: var(--radius-pill);
+  background: color-mix(in oklch, var(--ink) 8%, transparent);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 320ms var(--ease-expo), width 320ms var(--ease-expo), opacity var(--base) ease;
+}
+.nav-glide.is-on { opacity: 1; }
+
+.nav-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.nav-search {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 2.25rem;
+  margin-right: var(--space-1);
+  padding: 0 0.5rem 0 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-xs);
+  color: var(--faint);
+}
+.nav-search kbd { border: 0; background: color-mix(in oklch, var(--ink) 8%, transparent); border-radius: var(--radius-pill); padding-inline: 0.6em; }
+@media (hover: hover) and (pointer: fine) {
+  .nav-search:hover { color: var(--ink); border-color: var(--line-strong); }
+}
+.nav-menu-button { display: none; }
+
+/* ── Menu sheet (phones and small tablets) ──────────────────────────────── */
+.site-menu {
+  position: fixed;
+  inset: var(--nav-height) 0 0 0;
+  z-index: var(--z-menu);
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding: var(--space-8) var(--container-pad) var(--space-8);
+  background: var(--bg);
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--base) ease, visibility 0s linear var(--base);
+}
+.site-menu.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--base) ease;
+}
+.site-menu-links {
+  display: grid;
+  list-style: none;
+}
+.site-menu-links li {
+  border-bottom: 1px solid var(--line);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity var(--fast) ease, transform var(--fast) ease;
+}
+.site-menu.is-open .site-menu-links li {
+  opacity: 1;
+  transform: none;
+  transition: opacity 500ms var(--ease-expo) calc(var(--i) * 45ms + 60ms),
+    transform 600ms var(--ease-expo) calc(var(--i) * 45ms + 60ms);
+}
+.site-menu-links a {
+  display: block;
+  padding: var(--space-4) 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 9vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+.site-menu-links a[aria-current='page'] { color: var(--gold-ink); }
+.site-menu-foot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.site-menu-tools {
+  display: none;
+  gap: var(--space-2);
+}
+.site-menu-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 3rem;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+@media (max-width: 1080px) {
+  .nav-search span { display: none; }
+  .nav-search { padding-left: 0.6rem; }
+}
+@media (max-width: 880px) {
+  .nav-primary, .nav-search { display: none; }
+  .nav-menu-button { display: inline-grid; }
+  .site-menu { display: flex; }
+}
+/* Phones: the two switches move into the sheet so the name has room. */
+@media (max-width: 560px) {
+  .nav-tools > .icon-button:not(.nav-menu-button) { display: none; }
+  .site-menu-tools { display: flex; }
+  .site-menu-tools .icon-button { width: 3rem; height: 3rem; }
+  .site-nav-inner { gap: var(--space-3); }
+}
+@media (max-width: 360px) {
+  .nav-brand-name { font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-glide { transition: opacity var(--base) ease; }
+  .site-menu-links li { transform: none; }
+}

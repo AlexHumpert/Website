@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Check, Heart, Link2, Mail, MessageCircle, Repeat2, Share } from 'lucide-react';
 import { POSTS, loadPostHtml, postDate } from '../writing';
+import { sound } from '../tactile/sound';
+import { clamp } from '../tactile/pointer';
 
 const SUBSTACK = 'https://ahumpert.substack.com';
 const PUBLICATION = POSTS.find((post) => !post.note)?.publication ?? 'The Ansible';
@@ -42,6 +44,7 @@ function ShareButtons({ post }) {
     try {
       await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
+      sound.success();
       setTimeout(() => setCopied(false), 2000);
     } catch {
       window.prompt('Copy this link', shareUrl);
@@ -59,7 +62,7 @@ function ShareButtons({ post }) {
           Share
         </button>
       )}
-      <button type="button" className="post-action" onClick={copyLink} aria-live="polite">
+      <button type="button" className="post-action" data-sound="own" onClick={copyLink} aria-live="polite">
         {copied ? (
           <Check size={15} strokeWidth={1.6} aria-hidden="true" />
         ) : (
@@ -112,15 +115,50 @@ function SubstackButtons({ post }) {
   );
 }
 
+// A hairline of gold along the top edge that fills as the essay is read.
+function ReadingProgress({ targetRef }) {
+  const barRef = useRef(null);
+
+  useEffect(() => {
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      const target = targetRef.current;
+      if (!target || !barRef.current) return;
+      const rect = target.getBoundingClientRect();
+      const distance = rect.height - window.innerHeight * 0.6;
+      const progress = distance > 0 ? clamp(-rect.top / distance, 0, 1) : 0;
+      barRef.current.style.transform = `scaleX(${progress})`;
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
+    };
+    measure();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
+  }, [targetRef]);
+
+  return (
+    <div className="reading-progress" aria-hidden="true">
+      <div className="reading-progress-bar" ref={barRef} />
+    </div>
+  );
+}
+
 function PostNotFound() {
   return (
     <main className="post-page">
       <div className="post-column">
-        <p className="timeline-kicker">Writing</p>
+        <p className="kicker">Writing</p>
         <h1 className="post-title">This essay isn&rsquo;t here</h1>
-        <Link to="/writing" className="view-all">
+        <Link to="/writing" className="arrow-link">
           All writing
-          <span className="arrow-icon" aria-hidden="true">→</span>
+          <span className="arrow" aria-hidden="true" />
         </Link>
       </div>
     </main>
@@ -134,11 +172,11 @@ export default function PostPage() {
   const newer = POSTS[index - 1];
   const older = POSTS[index + 1];
   const [html, setHtml] = useState(null);
+  const articleRef = useRef(null);
 
   useHeadTags(post);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
     setHtml(null);
     let cancelled = false;
     loadPostHtml(slug).then((body) => {
@@ -153,14 +191,15 @@ export default function PostPage() {
 
   return (
     <main className="post-page">
-      <article className="post-column">
+      <ReadingProgress targetRef={articleRef} />
+      <article className="post-column" ref={articleRef}>
         <Link to="/writing" className="post-back">
           <ArrowLeft size={15} strokeWidth={1.6} aria-hidden="true" />
           Writing
         </Link>
 
         <header className="post-header">
-          <p className="timeline-kicker">
+          <p className="kicker post-kicker">
             {post.note ? 'Note' : post.publication} · <time dateTime={post.date}>{postDate(post.date)}</time> ·{' '}
             {post.minutes} min read
           </p>
@@ -183,7 +222,7 @@ export default function PostPage() {
             <ShareButtons post={post} />
           </div>
 
-          <section className="post-subscribe" aria-label="Subscribe">
+          <section className="post-subscribe" aria-label="Subscribe" data-spot>
             <h2 className="post-subscribe-title">Get new essays by email</h2>
             <p className="post-subscribe-text">
               Free, through {PUBLICATION} on Substack. No spam, unsubscribe any time.
@@ -207,13 +246,13 @@ export default function PostPage() {
           {(newer || older) && (
             <nav className="post-more" aria-label="More writing">
               {older && (
-                <Link to={`/writing/${older.slug}`} className="post-more-link">
+                <Link to={`/writing/${older.slug}`} className="post-more-link" data-spot>
                   <span className="post-more-label">Older</span>
                   <span className="post-more-title">{older.title}</span>
                 </Link>
               )}
               {newer && (
-                <Link to={`/writing/${newer.slug}`} className="post-more-link post-more-newer">
+                <Link to={`/writing/${newer.slug}`} className="post-more-link post-more-newer" data-spot>
                   <span className="post-more-label">Newer</span>
                   <span className="post-more-title">{newer.title}</span>
                 </Link>

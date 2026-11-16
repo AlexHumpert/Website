@@ -2,12 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/lens.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
     <title>Alexander Wolfgang Humpert</title>
+    <!-- Pick the sky before the first paint, so day visitors never see a flash of night. -->
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('sky') === 'day' ? 'day' : 'night';
+      } catch (e) {
+        document.documentElement.dataset.theme = 'night';
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&family=Onest:wght@300..700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

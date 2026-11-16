@@ -1,38 +1,12 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Layers, Lightbulb, PanelRightClose, PanelRightOpen } from 'lucide-react';
+import { TimelineGroup, TimelinePage } from './Timeline';
 import { PROJECTS } from '../data/projects';
-
-// Same month tints as the Library and Writing timelines.
-const MONTH_TONES = [
-  { accent: 'oklch(0.560 0.170 30)', bg: 'oklch(0.960 0.022 30)' },
-  { accent: 'oklch(0.580 0.130 80)', bg: 'oklch(0.965 0.025 85)' },
-  { accent: 'oklch(0.500 0.110 170)', bg: 'oklch(0.963 0.022 170)' },
-  { accent: 'oklch(0.500 0.120 215)', bg: 'oklch(0.960 0.020 215)' },
-  { accent: 'oklch(0.480 0.155 300)', bg: 'oklch(0.958 0.018 300)' },
-];
+import { dayLabel, groupByMonth, toneStyle } from '../lib/timeline';
+import { sound } from '../tactile/sound';
 
 const ITEMS = [...PROJECTS].sort((a, b) => b.date.localeCompare(a.date));
-
-const monthLabel = (date) =>
-  new Date(`${date}T00:00:00`).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
-
-function groupByMonth(items) {
-  const months = [];
-  items.forEach((item) => {
-    const key = item.date.slice(0, 7);
-    let month = months[months.length - 1];
-    if (!month || month.key !== key) {
-      month = { key, label: monthLabel(item.date), items: [] };
-      months.push(month);
-    }
-    month.items.push(item);
-  });
-  return months;
-}
-
-const dayLabel = (date) =>
-  new Date(`${date}T00:00:00`).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
 
 // Git-log style list of what changed, oldest first. An update with a `story`
 // opens into a short write-up with its screenshots.
@@ -49,7 +23,9 @@ function VersionLog({ versions }) {
           <p className="version-note">{version.note}</p>
           {version.story && (
             <details className="version-story">
-              <summary>Read the story</summary>
+              <summary data-sound="own" onClick={(event) => (event.currentTarget.parentElement.open ? sound.close() : sound.open())}>
+                Read the story
+              </summary>
               {version.story.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
@@ -77,38 +53,46 @@ function ProjectEntry({ project }) {
   const versions = project.versions ?? [];
   const hasVersions = versions.length > 0;
 
+  const toggle = (next) => {
+    if (next) sound.open();
+    else sound.close();
+    setOpen(next);
+  };
+
   return (
     <article
-      className="library-entry project-entry"
+      className="tl-entry entry project"
       id={project.slug}
       onKeyDown={(event) => {
         if (event.key === 'Escape' && open) {
-          setOpen(false);
+          toggle(false);
           toggleRef.current?.focus();
         }
       }}
     >
-      <p className="library-entry-meta">
+      <p className="entry-meta">
         <span className="badge">{project.tag}</span>
         {hasVersions && (
           <button
             ref={toggleRef}
             type="button"
             className="version-toggle"
+            data-sound="own"
             aria-expanded={open}
             aria-controls={panelId}
             aria-label={`${open ? 'Hide' : 'Show'} changelog, ${versions.length} updates`}
-            onClick={() => setOpen(!open)}
+            onClick={() => toggle(!open)}
           >
             {open ? <PanelRightClose size={15} aria-hidden="true" /> : <PanelRightOpen size={15} aria-hidden="true" />}
             <span className="version-count">{versions.length}</span>
+            <span className="version-toggle-text">updates</span>
           </button>
         )}
       </p>
 
       {/* The screenshot and the changelog share one frame: opening the log slides it
           in from the right and the screenshot gives up the space. */}
-      <div className={`project-media${open ? ' open' : ''}`}>
+      <div className={`project-media${open ? ' is-open' : ''}`} data-tilt={open ? undefined : '2.5'}>
         <a
           href={project.url}
           target="_blank"
@@ -118,7 +102,7 @@ function ProjectEntry({ project }) {
         >
           <img src={project.image} alt="" loading="lazy" />
           <span className="project-shot-cta" aria-hidden="true">
-            Open the app <span className="arrow-icon">↗</span>
+            Open the app <span className="arrow arrow-out" />
           </span>
         </a>
 
@@ -132,7 +116,7 @@ function ProjectEntry({ project }) {
         )}
       </div>
 
-      <h3 className="library-entry-title">
+      <h3 className="entry-title">
         <a href={project.url} target="_blank" rel="noopener noreferrer">
           {project.title}
         </a>
@@ -157,14 +141,14 @@ function ProjectEntry({ project }) {
       </dl>
 
       <div className="project-links">
-        <a href={project.url} target="_blank" rel="noopener noreferrer" className="community-post-link">
+        <a href={project.url} target="_blank" rel="noopener noreferrer" className="arrow-link arrow-link-tone">
           Try it live
-          <span className="arrow-icon" aria-hidden="true">↗</span>
+          <span className="arrow arrow-out" aria-hidden="true" />
         </a>
         {project.writeup && (
-          <Link to={project.writeup} className="community-post-link">
+          <Link to={project.writeup} className="arrow-link arrow-link-tone">
             Read the write-up
-            <span className="arrow-icon" aria-hidden="true">→</span>
+            <span className="arrow" aria-hidden="true" />
           </Link>
         )}
       </div>
@@ -174,98 +158,52 @@ function ProjectEntry({ project }) {
 }
 
 export default function ProjectsPage() {
-  const [activeMonth, setActiveMonth] = useState(null);
-  const monthRefs = useRef({});
-
-  const months = useMemo(
-    () =>
-      groupByMonth(ITEMS).map((month, i) => ({
-        ...month,
-        tone: MONTH_TONES[i % MONTH_TONES.length],
-      })),
-    []
-  );
+  const { hash } = useLocation();
+  const months = useMemo(() => groupByMonth(ITEMS), []);
 
   useEffect(() => {
     document.title = 'Projects — Alexander Wolfgang Humpert';
-    // Homepage links point at /projects#<slug>; the router doesn't scroll to hashes itself.
-    const target = window.location.hash && document.getElementById(window.location.hash.slice(1));
-    if (target) target.scrollIntoView({ block: 'start' });
   }, []);
 
+  // Homepage links point at /projects#<slug>; the router doesn't scroll to hashes itself.
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) setActiveMonth(entry.target.dataset.month);
-        });
-      },
-      { rootMargin: '-45% 0px -45% 0px' }
-    );
-    Object.values(monthRefs.current).forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
-  }, [months]);
-
-  const activeTone =
-    (months.find((month) => month.key === activeMonth) ?? months[0])?.tone ?? MONTH_TONES[0];
+    const target = hash && document.getElementById(hash.slice(1));
+    if (target) target.scrollIntoView({ block: 'start' });
+  }, [hash]);
 
   return (
-    <main className="timeline-page">
-      <div
-        className="timeline-bg"
-        style={{ backgroundColor: activeTone.bg }}
-        aria-hidden="true"
-      />
-
-      <div className="container">
-        <header className="timeline-intro">
-          <p className="timeline-kicker">Tinkering</p>
-          <h1 className="section-heading" style={{ marginBottom: 'var(--space-6)' }}>
-            Projects
-          </h1>
-          <p className="timeline-intro-text">
-            Little apps I&rsquo;ve built on evenings, weekends and the odd hackathon, each one
-            an idea I wanted to poke at. They&rsquo;re live, so click around. They run on real
-            AI models, so please go easy on them.
-          </p>
-        </header>
-
-        {/* One continuous line runs through every month, top to bottom. */}
-        <div className="timeline-continuous">
-          {months.map((month) => (
-            <section
-              key={month.key}
-              data-month={month.key}
-              ref={(el) => (monthRefs.current[month.key] = el)}
-              className="timeline-era library-month"
-              style={{ '--era-accent': month.tone.accent }}
-              aria-label={month.label}
-            >
-              <div className="timeline-era-grid">
-                <div>
-                  <div className="timeline-company-sticky">
-                    <h2 className="timeline-company-name">{month.label}</h2>
-                    <p className="timeline-company-meta">
-                      {month.items.length} {month.items.length === 1 ? 'project' : 'projects'}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="timeline-roles">
-                  {month.items.map((project) => (
-                    <ProjectEntry key={project.slug} project={project} />
-                  ))}
-                </div>
-              </div>
-            </section>
+    <TimelinePage
+      kicker="Tinkering"
+      title="Projects"
+      intro={
+        <>
+          Little apps I&rsquo;ve built on evenings, weekends and the odd hackathon, each one
+          an idea I wanted to poke at. They&rsquo;re live, so click around. They run on real
+          AI models, so please go easy on them.
+        </>
+      }
+      end="That’s where the tinkering started."
+    >
+      {months.map((month, i) => (
+        <TimelineGroup
+          key={month.key}
+          id={month.key}
+          tone={toneStyle(i)}
+          label={month.label}
+          aside={
+            <>
+              <h2 className="tl-label">{month.label}</h2>
+              <p className="tl-count">
+                {month.items.length} {month.items.length === 1 ? 'project' : 'projects'}
+              </p>
+            </>
+          }
+        >
+          {month.items.map((project) => (
+            <ProjectEntry key={project.slug} project={project} />
           ))}
-        </div>
-
-        <footer className="timeline-end">
-          <span className="timeline-end-dot" aria-hidden="true" />
-          <p>That&rsquo;s where the tinkering started.</p>
-        </footer>
-      </div>
-    </main>
+        </TimelineGroup>
+      ))}
+    </TimelinePage>
   );
 }

@@ -1,0 +1,145 @@
+/* ── Design tokens ──────────────────────────────────────────────────────────
+   The site is a sky. Night is the default: a deep blue-black ground, parchment
+   text, and gold used the way light is used, sparingly and where you look.
+   Day swaps the ground for high, pale daylight. Everything else (type, space,
+   motion) is shared by both. */
+
+:root {
+  color-scheme: dark;
+
+  /* Ground and surfaces */
+  --bg:        oklch(0.155 0.032 268);
+  --bg-raised: oklch(0.195 0.036 268);
+  --bg-sunk:   oklch(0.125 0.030 268);
+  --line:        oklch(0.935 0.028 85 / 0.13);
+  --line-strong: oklch(0.935 0.028 85 / 0.30);
+
+  /* Text */
+  --ink:   oklch(0.935 0.028 85);   /* parchment */
+  --muted: oklch(0.760 0.026 85);
+  --faint: oklch(0.640 0.030 268);
+
+  /* Gold: the one accent. --gold fills, --gold-ink is gold as text. */
+  --gold:     oklch(0.770 0.118 82);
+  --gold-ink: oklch(0.800 0.115 82);
+  --on-gold:  oklch(0.155 0.032 268);
+  --light:    oklch(0.800 0.130 75);  /* what the cursor's halo is made of */
+  --halo-strength: 0.075;
+
+  /* Pastels: structure only (timeline tones, section glows). */
+  --sage:    oklch(0.790 0.040 155);
+  --lapis:   oklch(0.780 0.050 265);
+  --apricot: oklch(0.845 0.065 70);
+  --sand:    oklch(0.850 0.050 100);
+  --clay:    oklch(0.705 0.075 45);
+
+  /* The sky, top to horizon, then the ground under it. */
+  --sky-high:  var(--bg);
+  --sky-deep:  oklch(0.230 0.075 266);
+  --sky-blue:  oklch(0.500 0.165 258);
+  --sky-pale:  oklch(0.830 0.070 235);
+  --sky-warm:  oklch(0.880 0.115 85);
+  --sky-amber: oklch(0.760 0.170 58);
+  --sky-ember: oklch(0.580 0.200 33);
+  --sky-violet: oklch(0.480 0.170 300);
+  --ground:    oklch(0.115 0.028 300);
+  --star:      oklch(0.960 0.020 85);
+  --glow-strength: 0.3;
+
+  /* Type */
+  --font-display: 'Hedvig Letters Serif', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-body:    'Onest', 'Helvetica Neue', system-ui, sans-serif;
+  --font-mono:    ui-monospace, 'SF Mono', SFMono-Regular, Menlo, monospace;
+
+  --text-xs:   clamp(0.75rem,  0.73rem + 0.08vw, 0.8125rem);
+  --text-sm:   clamp(0.875rem, 0.85rem + 0.12vw, 0.9375rem);
+  --text-base: clamp(1rem,     0.96rem + 0.20vw, 1.125rem);
+  --text-lg:   clamp(1.2rem,   1.14rem + 0.30vw, 1.375rem);
+  --text-xl:   clamp(1.44rem,  1.34rem + 0.50vw, 1.75rem);
+  --text-2xl:  clamp(1.75rem,  1.58rem + 0.85vw, 2.3rem);
+  --text-3xl:  clamp(2.2rem,   1.90rem + 1.50vw, 3.2rem);
+  --text-4xl:  clamp(2.8rem,   2.20rem + 3.00vw, 4.75rem);
+  --text-hero: clamp(3rem,     1.80rem + 6.00vw, 6rem);
+
+  /* Space */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --container-max: 1240px;
+  --container-pad: clamp(1.25rem, 5vw, 5rem);
+  --nav-height: 4.25rem;
+
+  --radius-sm: 4px;
+  --radius:    8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Layers, lowest to highest */
+  --z-behind:  -1;
+  --z-content:  1;
+  --z-sticky:  10;
+  --z-halo:    15;
+  --z-nav:     20;
+  --z-menu:    25;
+  --z-preview: 30;
+  --z-palette: 40;
+  --z-progress: 45;
+
+  /* Motion: one family of curves. Things arrive on ease-out, travel on in-out. */
+  --ease-out:    cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-expo:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --fast: 140ms;
+  --base: 220ms;
+  --slow: 480ms;
+
+  --shadow: 0 1px 1px oklch(0 0 0 / 0.25), 0 8px 24px oklch(0 0 0 / 0.28), 0 24px 60px oklch(0 0 0 / 0.22);
+}
+
+:root[data-theme='day'] {
+  color-scheme: light;
+
+  --bg:        oklch(0.985 0.004 255);
+  --bg-raised: oklch(1.000 0.000 0);
+  --bg-sunk:   oklch(0.962 0.007 255);
+  --line:        oklch(0.230 0.045 268 / 0.13);
+  --line-strong: oklch(0.230 0.045 268 / 0.32);
+
+  --ink:   oklch(0.230 0.045 268);   /* the night ground, now as ink */
+  --muted: oklch(0.420 0.035 268);
+  --faint: oklch(0.520 0.030 268);
+
+  --gold:     oklch(0.770 0.118 82);
+  --gold-ink: oklch(0.500 0.105 72);
+  --on-gold:  oklch(0.230 0.045 268);
+  --light:    oklch(0.820 0.130 75);
+  --halo-strength: 0.16;
+
+  /* Pastels stay as fills; text tinted by them is deepened where it is used. */
+
+  --sky-high:  var(--bg);
+  --sky-deep:  oklch(0.945 0.025 250);
+  --sky-blue:  oklch(0.860 0.065 245);
+  --sky-pale:  oklch(0.955 0.030 220);
+  --sky-warm:  oklch(0.950 0.070 90);
+  --sky-amber: oklch(0.870 0.120 65);
+  --sky-ember: oklch(0.760 0.150 42);
+  --sky-violet: oklch(0.830 0.080 300);
+  --ground:    oklch(0.945 0.012 262);
+  --glow-strength: 0.5;
+
+  --shadow: 0 1px 1px oklch(0.23 0.045 268 / 0.05), 0 8px 24px oklch(0.23 0.045 268 / 0.08), 0 24px 60px oklch(0.23 0.045 268 / 0.08);
+}
+
+/* Text tinted by a timeline tone: as is on night, deepened for contrast on day. */
+[style*='--tone'] { --tone-ink: var(--tone); }
+[data-theme='day'] [style*='--tone'] { --tone-ink: color-mix(in oklch, var(--tone) 42%, var(--ink)); }

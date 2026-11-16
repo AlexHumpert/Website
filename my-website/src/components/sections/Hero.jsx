@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
-import Orb from '../Orb';
+import Stars from '../Stars';
+import LensMark from '../../tactile/LensMark';
+import { toggleTheme, useTheme } from '../../theme';
 import { POSTS } from '../../writing';
 import { ROLES } from '../../data/roles';
 import library from '../../data/library.json';
@@ -11,7 +13,10 @@ const LATEST_LIBRARY = library
   .sort((a, b) => b.date.localeCompare(a.date))[0];
 const LIBRARY_VERB = { video: 'Last watched', article: 'Last read', book: 'Last finished' };
 
+const TITLE = 'Come see what I’m up to.';
+
 export default function Hero() {
+  const theme = useTheme();
   const now = [
     LATEST_POST && { label: LATEST_POST.note ? 'Latest note' : 'Latest essay', title: LATEST_POST.title, to: `/writing/${LATEST_POST.slug}` },
     { label: 'Currently', title: `Lead AI Solution Consultant, ${CURRENT_ROLE.title}`, to: '/work' },
@@ -19,34 +24,61 @@ export default function Hero() {
   ].filter(Boolean);
 
   return (
-    <section className="section hero" aria-label="Introduction">
-      <Orb
-        innerColor="oklch(0.600 0.200 22)"
-        outerColor="oklch(0.720 0.175 50)"
-        animationIndex={0}
-        duration={11}
-        style={{ width: '680px', height: '680px', top: '-120px', right: '-180px' }}
-      />
+    <section className="hero" aria-label="Introduction">
+      {/* The sky: night falling to a lit horizon, with the ground below it. */}
+      <div className="hero-sky">
+        <Stars />
+        <div className="grain" aria-hidden="true" />
 
-      <div className="container hero-inner">
-        <div className="hero-copy">
-          <p className="hero-kicker">Curious, mostly</p>
-          <h1 className="hero-title">Come see what I&rsquo;m up to.</h1>
-          <p className="hero-lede">
-            This is my little corner of the internet: ideas I couldn&rsquo;t stop chasing, things I&rsquo;m building, and whatever I&rsquo;ve been reading or watching lately. Pull up a chair.
-          </p>
+        <div className="container hero-sky-inner">
+          <div className="hero-copy">
+            <p className="hero-kicker">Curious, mostly</p>
+            <h1 className="hero-title" aria-label={TITLE}>
+              {TITLE.split(' ').map((word, i) => (
+                <span key={i} className="hero-word" style={{ '--i': i }} aria-hidden="true">
+                  {word}{' '}
+                </span>
+              ))}
+            </h1>
+            <p className="hero-lede">
+              This is my little corner of the internet: ideas I couldn&rsquo;t stop chasing, things I&rsquo;m building, and whatever I&rsquo;ve been reading or watching lately. Pull up a chair.
+            </p>
+          </div>
+
+          {/* The lens hangs in the sky like a moon. It watches the cursor,
+              and pressing it turns night into day. */}
+          <button
+            type="button"
+            className="hero-lens"
+            data-sound="own"
+            data-magnetic="0.12"
+            onClick={(event) => {
+              const rect = event.currentTarget.getBoundingClientRect();
+              toggleTheme({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 });
+            }}
+            aria-label={theme === 'day' ? 'Switch to the night sky' : 'Switch to the day sky'}
+          >
+            <LensMark reach={900} lean={1.1} squeeze={2.2} />
+            <span className="hero-lens-hint" aria-hidden="true">
+              {theme === 'day' ? 'Bring back the night' : 'Let the day in'}
+            </span>
+          </button>
         </div>
+      </div>
 
-        <ul className="hero-now" aria-label="Right now">
-          {now.map((item) => (
-            <li key={item.label}>
-              <Link to={item.to} className="hero-now-item">
-                <span className="hero-now-label">{item.label}</span>
-                <span className="hero-now-title">{item.title}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+      <div className="hero-ground">
+        <div className="container">
+          <ul className="hero-now" aria-label="Right now">
+            {now.map((item) => (
+              <li key={item.label}>
+                <Link to={item.to} className="hero-now-item" data-spot>
+                  <span className="hero-now-label">{item.label}</span>
+                  <span className="hero-now-title">{item.title}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );
